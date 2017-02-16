@@ -1,0 +1,14 @@
+{
+  "pages":[
+    "pages/homePage/insurancetypepage/insurancetypepage",
+    "pages/homePage/homepage/homepage",
+    "pages/logs/logs",
+    "pages/insuranceCaculator/insuranceCaculator"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}

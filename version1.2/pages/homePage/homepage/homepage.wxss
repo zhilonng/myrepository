@@ -1,0 +1,8 @@
+/* pages/homePage/homepage/homepage.wxss */
+@import "../../template/attributeListUnit.wxss";
+@import "../../template/exceptionUnit.wxss";
+@import "../../template/caculateResultUnit.wxss";
+page{
+    height: 100%;
+    background: #eeeeee;
+}

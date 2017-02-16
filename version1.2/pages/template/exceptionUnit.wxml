@@ -1,0 +1,6 @@
+<template name="exceptionUnit">
+<!--异常显示-->
+<view wx:if="{{isShowException}}" class="tp_exceptionUnit">
+<text class="tp_exceptionInfo">{{exceptionInfo}}</text>
+</view>
+</template>

@@ -1,0 +1,46 @@
+<template name="attributeUnit">
+<!--属性布局-->
+<view wx:for="{{attributeName}}" wx:for-item="attributeName" class="tp_atrributeUnit">
+<!--属性名-->
+<view class="tp_attributeName">{{attributeName}}:</view>
+<!--方格式布局-->
+<view wx:if="{{attributeUnitType[index]==1}}" class="tp_attributeValueSet" >
+<button class="{{userResult[index][btnIndex]}}" wx:for="{{attributeValue[index]}}" wx:for-index="btnIndex" data-index="{{index}}" data-btnindex="{{btnIndex}}" bindtap="tpBtnPressHandler">{{item}}</button>
+</view>
+<!--radio布局-->
+<radio-group wx:if="{{attributeUnitType[index]==2}}" class="tp_cg_atrributeUnit">
+<radio wx:for="{{attributeValue[index]}}" wx:for-index="rdIndex" class="tp_cb_attributeValue" value="{{rdIndex}}">
+<text class="tp_tv_attributeValue">{{item}}</text>
+</radio>
+</radio-group>
+<!--选项卡-->
+<view wx:if="{{attributeUnitType[index]==3}}" class="tp_as_attributeValueSet" >
+<picker value="{{attributeValueindex[index][0]}}" range="{{attributeValue[index][0]}}" data-index="{{index}}" bindchange="evShowFirstStageAttribute" >
+    <view class="picker">
+     <input class="tp_ip_attributeValue" type="text" placeholder="省份" value="{{attributeValueindex[index][0]}}"/>
+    </view>
+  </picker>
+<picker  value="{{attributeValueindex[index][1]}}" range="{{attributeValue[index][1]}}" data-index="{{index}}" bindchange="evShowSecondStageAttribute">
+    <view class="picker">
+     <input class="tp_ip_attributeValue" type="text" placeholder="市/县" value="{{attributeValueindex[index][1]}}"/>
+    </view>
+  </picker>
+  <picker  value="{{attributeValueindex[index][2]}}" range="{{attributeValue[index][2]}}" data-index="{{index}}" bindchange="evShowthirdStageAttribute">
+    <view class="picker">
+     <input class="tp_ip_attributeValue" type="text" placeholder="区" value="{{attributeValueindex[index][2]}}"/>
+    </view>
+  </picker>
+</view>
+<!--日期选择器-->
+<view wx:if="{{attributeUnitType[index]==4}}" class="tp_as_attributeValueSet" >
+<view class="section">
+  <picker mode="date" value="{{userResult[index][0]}}" start="{{attributeValueindex[index][0]}}" end="{{attributeValueindex[index][1]}}" data-index="{{index}}" bindchange="bindDateChange">
+    <view class="picker">
+    <input class="tp_ip_attributeValue" type="text" placeholder="{{userResult[index][0]}}" value="{{userResult[index][0]}}"/>
+    </view>
+  </picker>
+</view>
+</view>
+  
+</view>
+</template>

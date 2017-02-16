@@ -1,0 +1,8 @@
+<!--pages/homePage/insurancetypepage/insurancetypepage.wxml-->
+<view wx:for="{{productName}}" data-index="{{index}}" bindtap="turnIntoCaculaPage"  class="insuranceContainer">
+<image src="../../image/1.jpg" class="insurancePhoto"/>
+<view class="insuranceNameAndPrice">
+<text class="insuranceName">{{item}}</text>
+<text class="insurancePrice">￥395.00</text>
+</view>
+</view>

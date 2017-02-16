@@ -1,0 +1,14 @@
+.tp_exceptionUnit{
+    height: 60rpx;
+    width: 100%;
+    margin-top: -11rpx;
+    background: #e64340; 
+    text-align: center;
+    position: fixed;
+    z-index: 9999;
+}
+.tp_exceptionInfo{
+    width: 100%;
+    font-size: 30rpx;
+    color: #FFFFFF;
+}

@@ -1,0 +1,67 @@
+/*方格式布局*/
+.tp_atrributeUnit{
+    width: 100%;
+    margin-top: 15rpx;
+    margin-bottom: 15rpx;
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+}
+.tp_attributeName{
+    width: 20%;
+    margin-top: 15rpx;
+    margin-bottom: 15rpx;
+    margin-left: 2%;
+    font-size: 33rpx;
+    color: #000;
+}
+.tp_attributeValueSet{
+    width: auto;
+    margin-right: 2%;
+    margin-top: 15rpx;
+    margin-bottom: 15rpx;
+    display:flex;
+    justify-content:flex-end;
+    flex-wrap: wrap;
+}
+.tp_attributeValue{
+    width: 120rpx;
+    height: 60rpx;
+    margin-left: 15rpx;
+    margin-bottom:15rpx;
+    border:1rpx #1AAD19 solid;
+    font-size: 13px;
+    color: #1AAD19;
+    background: #FFFFFF;
+    line-height: 60rpx;
+    text-align: center;
+    padding: 0;
+}
+.tp_pressattributeValue{
+    width: 120rpx;
+    height: 60rpx;
+    margin-left: 15rpx;
+    border:1rpx #1AAD19 solid;
+    font-size: 13px;
+    color: #FFFFFF;
+    background: #1AAD19;
+    line-height: 60rpx;
+    text-align: center;
+    padding: 0;
+}
+/*checkbox式布局*/
+.tp_cg_atrributeUnit{
+    margin-bottom: 15rpx;
+    margin-top: 15rpx;
+}
+.tp_cb_attributeValue{
+    margin-right: 10rpx;
+}
+/*选项卡布局*/
+.tp_as_attributeValueSet{
+    margin-top: 5rpx;
+    margin-bottom: 15rpx;
+}
+.tp_ip_attributeValue{
+    font-size: 30rpx;
+}
