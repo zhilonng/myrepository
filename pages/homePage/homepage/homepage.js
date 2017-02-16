@@ -1,49 +1,92 @@
 // pages/homePage/homepage/homepage.js
 Page({
   data:{
-    attributeName:['属性名1','属性名2','属性名3'],
-    attributeValue:[
-      ['男','女'],['男','女'],['2015-09-01','2017-09-01']
-      ],
-    attributeUnitType:[1,2,4],
+    attributeName:[],
+    attributeValue:[],
+    attributeUnitType:[],
     isShowException:false,
     exceptionInfo:"卡号格式不正确",
-    attributeValueindex:[['','',''],['','',''],['','','']],
-    userResult:[['tp_pressattributeValue','tp_attributeValue'],['tp_attributeValue','tp_attributeValue'],['2015-09-01']],
+    attributeValueindex:[],
+    userResult:[],
     areaid:[],
     secondareaid:[],
+    caculateResult:6990,
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-
     var that = this
-    var list = [];
-    //获取area一级目录，完成数据初始化
+
+// 获取保险参数并完成初始化
     wx.request({
-    url: 'https://baby.mamid.cn/Caculate/Index/insProvince', 
+    url: 'https://baby.mamid.cn/Caculate/Goods/getGoods/goods_goods_type_id/'+options.goods_goods_type_id, 
     header: {
         'content-type': 'application/json'
     },
     success: function(res) {
       console.log(res.data)
-      for(var i=0;i<res.data.length;i++){
-        list.push(res.data[i].area_areaname)
-        that.data.areaid.push(res.data[i].area_id)
+      that.data.caculateResult = res.data.defaultPrice
+      var length = 0
+      for(var js2 in res.data){
+        length++;
       }
-      that.data.attributeName.push("投保人地区")
-      that.data.attributeValue.push([])
-      that.data.attributeValue[that.data.attributeValue.length-1].push(list)
-      that.data.attributeUnitType.push(3)
-      that.data.attributeValueindex.push(['','',''])
+      console.log(length)
+      for(var i=0;i<length-1;i++){
+        
+        var attributeValueindexList =[] //attributeValueindex初始化
+        var list = [];
+        if(res.data[i].attributeUnitType == 1){
+          for(var j=0;j<res.data[i].attributeValue.length;j++){
+            attributeValueindexList.push("tp_attributeValue")
+          }
+        }
+        if(res.data[i].attributeUnitType ==3){
+          
+        }
+        that.data.attributeValue.push(res.data[i].attributeValue)
+        that.data.userResult.push(attributeValueindexList)
+        that.data.attributeName.push(res.data[i].attributeName)
+        that.data.attributeUnitType.push(res.data[i].attributeUnitType)
+      }
       that.setData({
         attributeName:that.data.attributeName,
-        attributeValue:that.data.attributeValue,
         attributeUnitType:that.data.attributeUnitType,
-        attributeValueindex:that.data.attributeValueindex
+        attributeValue:that.data.attributeValue,
+        userResult:that.data.userResult
       })
-      console.log(that.data.firstStageAtrribute)
+      console.log(that.data.attributeName)
+      console.log(that.data.attributeUnitType)
+      console.log(that.data.userResult)
+      console.log(that.data.attributeValue)
     }
-  })
+    })
+
+    // var list = [];
+  //   //获取area一级目录，完成数据初始化
+  //   wx.request({
+  //   url: 'https://baby.mamid.cn/Caculate/Index/insProvince', 
+  //   header: {
+  //       'content-type': 'application/json'
+  //   },
+  //   success: function(res) {
+  //     console.log(res.data)
+  //     for(var i=0;i<res.data.length;i++){
+  //       list.push(res.data[i].area_areaname)
+  //       that.data.areaid.push(res.data[i].area_id)
+  //     }
+  //     that.data.attributeName.push("投保人地区")
+  //     that.data.attributeValue.push([])
+  //     that.data.attributeValue[that.data.attributeValue.length-1].push(list)
+  //     that.data.attributeUnitType.push(3)
+  //     that.data.attributeValueindex.push(['','',''])
+  //     that.setData({
+  //       attributeName:that.data.attributeName,
+  //       attributeValue:that.data.attributeValue,
+  //       attributeUnitType:that.data.attributeUnitType,
+  //       attributeValueindex:that.data.attributeValueindex
+  //     })
+  //     console.log(that.data.firstStageAtrribute)
+  //   }
+  // })
   
   },
   onReady:function(){

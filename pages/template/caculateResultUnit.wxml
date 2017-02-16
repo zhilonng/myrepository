@@ -4,7 +4,7 @@
 <view class="tp_line"></view>
 <view class="tp_caculateResultUnit">
 <!--保费结果-->
-<view class="tp_caculateResult">￥6990</view>
+<view class="tp_caculateResult">￥{{caculateResult}}</view>
 <!--保费计算按钮-->
 <button class="tp_btn_caculate" hover-class="tp_btn_presscaculate">保费计算</button>
 </view>

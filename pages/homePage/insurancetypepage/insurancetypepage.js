@@ -1,6 +1,7 @@
 // pages/homePage/insurancetypepage/insurancetypepage.js
 Page({
   data:{
+    productInfo:[],
     productName:[]
   },
   onLoad:function(options){
@@ -17,7 +18,8 @@ Page({
         that.data.productName.push(res.data[i].goods_type_name)
       }
       that.setData({
-        productName:that.data.productName
+        productName:that.data.productName,
+        productInfo:res.data
       })
     }
     })
@@ -36,8 +38,9 @@ Page({
   },
   turnIntoCaculaPage:function(e){
     console.log(e)
+    var that = this
     wx.navigateTo({
-      url: '../homepage/homepage?',
+      url: '../homepage/homepage?goods_goods_type_id='+that.data.productInfo[e.target.dataset.index].goods_type_id,
       success: function(res){
         // success
       },

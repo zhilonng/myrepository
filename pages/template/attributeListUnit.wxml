@@ -41,6 +41,10 @@
   </picker>
 </view>
 </view>
-  
+<!--label布局-->
+<view wx:if="{{attributeUnitType[index]==5}}" class="tp_as_attributeValueSet" >
+<label>{{attributeValue[index]}}</label>
+</view>
+
 </view>
 </template>
