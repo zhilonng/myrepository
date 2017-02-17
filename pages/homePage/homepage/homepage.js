@@ -3,6 +3,7 @@ var common = require('../../template/common.js')
 
 Page({
   data:{
+    lastResult:{},
     productInfo:[],
     attributeName:[],
     attributeValue:[],
@@ -144,6 +145,7 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
+  // 方格布局点击事件
   tpBtnPressHandler:function(e){
     var that = this
     for(var i=0;i<that.data.userResult[e.target.dataset.index].length;i++){
@@ -155,6 +157,13 @@ Page({
     }
     that.setData({
       userResult:that.data.userResult
+    })
+
+    // 刷新价格
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
+    common.getPrice(result)
+    that.setData({
+      lastResult:result
     })
   },
   // 一级目录数据修改与二级目录数据初始化
@@ -246,12 +255,20 @@ Page({
       attributeValueindex:that.data.attributeValueindex
     })
   },
+  // 时间选择器日期改变事件
   bindDateChange:function(e){
     console.log(e)
     var that = this
     that.data.userResult[e.target.dataset.index].splice(0,1,e.detail.value)
     that.setData({
       userResult:that.data.userResult
+    })
+
+    // 刷新价格
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
+    common.getPrice(result)
+    that.setData({
+      lastResult:result
     })
   },
   // radio点击事件
@@ -262,11 +279,15 @@ Page({
     that.setData({
       userResult:that.data.userResult
     })
+    // 刷新价格
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
+    common.getPrice(result)
+    that.setData({
+      lastResult:result
+    })
   },
   // 点击计算事件
   resultCaculateHandle:function(){
-    var that = this
-    var result = common.getUserResult(that.data.productInfo,that.data.userResult)
-    common.getPrice(result)
+    
   }
 })
