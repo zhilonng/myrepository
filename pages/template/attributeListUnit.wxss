@@ -16,7 +16,7 @@
     color: #000;
 }
 .tp_attributeValueSet{
-    width: auto;
+    width: 80%;
     margin-right: 2%;
     margin-top: 15rpx;
     margin-bottom: 15rpx;
@@ -30,7 +30,7 @@
     margin-left: 15rpx;
     margin-bottom:15rpx;
     border:1rpx #1AAD19 solid;
-    font-size: 13px;
+    font-size: 12px;
     color: #1AAD19;
     background: #FFFFFF;
     line-height: 60rpx;
@@ -42,7 +42,7 @@
     height: 60rpx;
     margin-left: 15rpx;
     border:1rpx #1AAD19 solid;
-    font-size: 13px;
+    font-size: 12px;
     color: #FFFFFF;
     background: #1AAD19;
     line-height: 60rpx;
@@ -64,4 +64,10 @@
 }
 .tp_ip_attributeValue{
     font-size: 30rpx;
+}
+/*label*/
+.tp_lb_attributeValue{
+    margin-left: 15rpx;
+    height: 100%;
+    line-height: 250%;
 }

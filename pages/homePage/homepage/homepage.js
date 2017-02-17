@@ -1,6 +1,9 @@
 // pages/homePage/homepage/homepage.js
+var common = require('../../template/common.js')
+
 Page({
   data:{
+    productInfo:[],
     attributeName:[],
     attributeValue:[],
     attributeUnitType:[],
@@ -31,27 +34,67 @@ Page({
       }
       console.log(length)
       for(var i=0;i<length-1;i++){
-        
+        if(res.data[i]==undefined){length++}else{
         var attributeValueindexList =[] //attributeValueindex初始化
-        var list = [];
+        var firstCatalogList = [];
+        // 方格式布局
         if(res.data[i].attributeUnitType == 1){
           for(var j=0;j<res.data[i].attributeValue.length;j++){
+            if(res.data[i].attributeValue[j] == res.data[i].default){
+              attributeValueindexList.push("tp_pressattributeValue")
+            }else{
             attributeValueindexList.push("tp_attributeValue")
+            }
           }
         }
+        //radio
+        if(res.data[i].attributeUnitType == 2){
+          for(var j=0;j<res.data[i].attributeValue.length;j++){
+            console.log(res.data[i].attributeValue[j])
+            console.log(res.data[i].default)
+            if(res.data[i].attributeValue[j]==res.data[i].default){
+              attributeValueindexList.push(j)
+            }
+          }
+        }
+        // 地区选择器
         if(res.data[i].attributeUnitType ==3){
-          
+          //获取area一级目录，完成数据初始化
+        wx.request({
+        url: 'https://baby.mamid.cn/Caculate/Index/insProvince', 
+        header: {
+            'content-type': 'application/json'
+        },
+        success: function(res) {
+          console.log(res.data)
+        }
+        })
+        }
+        
+        // 时间选择器
+        if(res.data[i].attributeUnitType == 4){
+          var today = new Date()
+          var startTime = new Date(today.valueOf()-res.data[i].attributeValue[1]*24*60*60*1000)
+          var endTime = new Date(today.valueOf()-res.data[i].attributeValue[0]*24*60*60*1000)
+          startTime = startTime.getFullYear()+"-"+(startTime.getMonth()+1)+"-"+startTime.getDate()
+          endTime = endTime.getFullYear()+"-"+(endTime.getMonth()+1)+"-"+endTime.getDate()
+          res.data[i].attributeValue.splice(0,1,startTime)
+          res.data[i].attributeValue.splice(1,1,endTime)
+          attributeValueindexList.push(res.data[i].default)
         }
         that.data.attributeValue.push(res.data[i].attributeValue)
         that.data.userResult.push(attributeValueindexList)
         that.data.attributeName.push(res.data[i].attributeName)
         that.data.attributeUnitType.push(res.data[i].attributeUnitType)
       }
+      }
       that.setData({
+        productInfo:res.data,
         attributeName:that.data.attributeName,
         attributeUnitType:that.data.attributeUnitType,
         attributeValue:that.data.attributeValue,
-        userResult:that.data.userResult
+        userResult:that.data.userResult,
+        caculateResult:res.data.defaultPrice
       })
       console.log(that.data.attributeName)
       console.log(that.data.attributeUnitType)
@@ -210,5 +253,20 @@ Page({
     that.setData({
       userResult:that.data.userResult
     })
+  },
+  // radio点击事件
+  radioClickHandler:function(e){
+    console.log(e)
+    var that = this
+    that.data.userResult[e.target.dataset.index].splice(0,1,e.target.dataset.rdindex)
+    that.setData({
+      userResult:that.data.userResult
+    })
+  },
+  // 点击计算事件
+  resultCaculateHandle:function(){
+    var that = this
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult)
+    common.getPrice(result)
   }
 })

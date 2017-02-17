@@ -9,7 +9,7 @@
 </view>
 <!--radio布局-->
 <radio-group wx:if="{{attributeUnitType[index]==2}}" class="tp_cg_atrributeUnit">
-<radio wx:for="{{attributeValue[index]}}" wx:for-index="rdIndex" class="tp_cb_attributeValue" value="{{rdIndex}}">
+<radio wx:for="{{attributeValue[index]}}" wx:for-index="rdIndex" class="tp_cb_attributeValue" value="{{rdIndex}}" checked="{{rdIndex==userResult[index][0]}}" data-index="{{index}}" data-rdindex="{{rdIndex}}" bindtap="radioClickHandler">
 <text class="tp_tv_attributeValue">{{item}}</text>
 </radio>
 </radio-group>
@@ -36,14 +36,14 @@
 <view class="section">
   <picker mode="date" value="{{userResult[index][0]}}" start="{{attributeValueindex[index][0]}}" end="{{attributeValueindex[index][1]}}" data-index="{{index}}" bindchange="bindDateChange">
     <view class="picker">
-    <input class="tp_ip_attributeValue" type="text" placeholder="{{userResult[index][0]}}" value="{{userResult[index][0]}}"/>
+    {{userResult[index][0]}}
     </view>
   </picker>
 </view>
 </view>
 <!--label布局-->
 <view wx:if="{{attributeUnitType[index]==5}}" class="tp_as_attributeValueSet" >
-<label>{{attributeValue[index]}}</label>
+<view class="tp_lb_attributeValue">{{attributeValue[index]}}</view>
 </view>
 
 </view>
