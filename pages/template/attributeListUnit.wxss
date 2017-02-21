@@ -62,6 +62,7 @@
 .tp_as_attributeValueSet{
     margin-top: 5rpx;
     margin-bottom: 15rpx;
+    line-height: 140%;
 }
 .tp_ip_attributeValue{
     font-size: 30rpx;

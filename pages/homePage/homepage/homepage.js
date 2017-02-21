@@ -141,6 +141,9 @@ Page({
   },
   // 方格布局点击事件
   tpBtnPressHandler:function(e){
+
+    common.showDialog()
+
     var that = this
     for(var i=0;i<that.data.userResult[e.target.dataset.index].length;i++){
       if(i==e.target.dataset.btnindex){
@@ -155,9 +158,25 @@ Page({
 
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
-    common.getPrice(result)
-    that.setData({
-      lastResult:result
+    wx.request({
+      url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
+      header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+            },
+      data: {
+          result:JSON.stringify(result)
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        // success
+        console.log(res.data)
+        that.setData({
+        lastResult:result,
+        caculateResult:res.data
+      })
+         wx.hideToast()
+      },
     })
   },
   // 一级目录数据修改与二级目录数据初始化
@@ -252,6 +271,7 @@ Page({
   // 时间选择器日期改变事件
   bindDateChange:function(e){
     console.log(e)
+    common.showDialog()
     var that = this
     that.data.userResult[e.target.dataset.index].splice(0,1,e.detail.value)
     that.setData({
@@ -260,25 +280,59 @@ Page({
 
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
-    common.getPrice(result)
-    that.setData({
-      lastResult:result
+    wx.request({
+      url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
+      header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+            },
+      data: {
+          result:JSON.stringify(result)
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        // success
+        console.log(res.data)
+        that.setData({
+        lastResult:result,
+        caculateResult:res.data
+      })
+        wx.hideToast()
+      },
     })
   },
   // radio点击事件
   radioClickHandler:function(e){
     console.log(e)
     var that = this
+    common.showDialog()
     that.data.userResult[e.target.dataset.index].splice(0,1,e.target.dataset.rdindex)
     that.setData({
       userResult:that.data.userResult
     })
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
-    common.getPrice(result)
-    that.setData({
-      lastResult:result
+    wx.request({
+      url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
+      header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+            },
+      data: {
+          result:JSON.stringify(result)
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        // success
+        console.log(res.data)
+        that.setData({
+        lastResult:result,
+        caculateResult:res.data
+      })
+        wx.hideToast()
+       },
     })
+    
   },
   // 点击计算事件
   resultCaculateHandle:function(){

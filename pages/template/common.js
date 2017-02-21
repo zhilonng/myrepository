@@ -3,128 +3,135 @@
 function getUserResult(productInfo,userResult,lastResult) {
   var result ={}
   var length = 0
+  var newProductInfo = []
   for(var js2 in productInfo){
     length++;
  }
+ var length2 = length
+ for(var k=0;k<length2-1;k++){
+     console.log(k)
+     if(productInfo[k] == undefined){length2++}else{
+     newProductInfo.push(productInfo[k])
+     }
+ }
  for(var i=0;i<length-1;i++){
-     if(productInfo[i] == undefined){length++}else{
          //方格类型
-         if(productInfo[i].attributeUnitType == 1){
+         if(newProductInfo[i].attributeUnitType == 1){
+             console.log(userResult)
              for(var j=0;j<userResult[i].length;j++){
                  if(userResult[i][j] == "tp_pressattributeValue"){
                      if(isEmptyObject(lastResult)){
-                        if(productInfo[i].attributeValue[j] != productInfo[i].default){
-                result[productInfo[i].name] = productInfo[i].attributeValue[j]
-                result["."+productInfo[i].name]=productInfo[i].default
+                        if(newProductInfo[i].attributeValue[j] != newProductInfo[i].default){
+                result[newProductInfo[i].name] = newProductInfo[i].attributeValue[j]
+                result["."+newProductInfo[i].name]=newProductInfo[i].default
                      }else{
-                result[productInfo[i].name]=productInfo[i].attributeValue[j]
+                result[newProductInfo[i].name]=newProductInfo[i].attributeValue[j]
                      }
                      }else{
-                         if(lastResult["."+productInfo[i].name] ==undefined){
-                         if(productInfo[i].attributeValue[j] != lastResult[productInfo[i].name]){
-                result[productInfo[i].name] = productInfo[i].attributeValue[j]
-                result["."+productInfo[i].name]=lastResult[productInfo[i].name]
+                         if(lastResult["."+newProductInfo[i].name] ==undefined){
+                         if(newProductInfo[i].attributeValue[j] != lastResult[newProductInfo[i].name]){
+                result[newProductInfo[i].name] = newProductInfo[i].attributeValue[j]
+                result["."+newProductInfo[i].name]=lastResult[productInfo[i].name]
                      }else{
-                result[productInfo[i].name]=productInfo[i].attributeValue[j]
+                result[newProductInfo[i].name]=newProductInfo[i].attributeValue[j]
                      }
                      }else{
-                         if(productInfo[i].attributeValue[j] != lastResult[productInfo[i].name]){
-                result[productInfo[i].name] = productInfo[i].attributeValue[j]
-                result["."+productInfo[i].name]=lastResult[productInfo[i].name]
+                         if(newProductInfo[i].attributeValue[j] != lastResult[productInfo[i].name]){
+                result[newProductInfo[i].name] = newProductInfo[i].attributeValue[j]
+                result["."+newProductInfo[i].name]=lastResult[newProductInfo[i].name]
                      }else{
-                result[productInfo[i].name]=productInfo[i].attributeValue[j]
+                result[newProductInfo[i].name]=newProductInfo[i].attributeValue[j]
                      }
                      }
                      }
-                     if(productInfo[i].name == "agelimit"){
-                    result["goodsCode"] = productInfo[i].goodsCode[j]
+                     if(newProductInfo[i].name == "agelimit"){
+                    result["goodsCode"] = newProductInfo[i].goodsCode[j]
                      }
                      
                  }
              }
          }
          //radio
-         if(productInfo[i].attributeUnitType == 2){
+         if(newProductInfo[i].attributeUnitType == 2){
              if(isEmptyObject(lastResult)){
-                 if(productInfo[i].attributeValue[userResult[i][0]] != productInfo[i].default){
-                      result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
-                       result["."+productInfo[i].name] = productInfo[i].default
+                 if(newProductInfo[i].attributeValue[userResult[i][0]] != newProductInfo[i].default){
+                      result[newProductInfo[i].name] = newProductInfo[i].attributeValue[userResult[i][0]]
+                       result["."+newProductInfo[i].name] = newProductInfo[i].default
                  }else{
-                     result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
+                     result[newProductInfo[i].name] = newProductInfo[i].attributeValue[userResult[i][0]]
                  }
              }else{
-                 if(lastResult["."+productInfo[i].name] ==undefined){
-                     if(productInfo[i].attributeValue[userResult[i][0]] != lastResult[productInfo[i].name]){
-                         result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
-                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
+                 if(lastResult["."+newProductInfo[i].name] ==undefined){
+                     if(newProductInfo[i].attributeValue[userResult[i][0]] != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue[userResult[i][0]]
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue[userResult[i][0]]
                      }
                  }else{
-                     if(productInfo[i].attributeValue[userResult[i][0]] != lastResult[productInfo[i].name]){
-                         result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
-                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
+                     if(newProductInfo[i].attributeValue[userResult[i][0]] != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue[userResult[i][0]]
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue[userResult[i][0]]
                      }
                  }
              }
          }
         //  时间选择器
-         if(productInfo[i].attributeUnitType == 4){
+         if(newProductInfo[i].attributeUnitType == 4){
              if(isEmptyObject(lastResult)){
-                 if(userResult[i][0] != productInfo[i].default){
-                      result[productInfo[i].name] = userResult[i][0]
-                       result["."+productInfo[i].name] = productInfo[i].default
+                 if(userResult[i][0] != newProductInfo[i].default){
+                      result[newProductInfo[i].name] = userResult[i][0]
+                       result["."+newProductInfo[i].name] = newProductInfo[i].default
                  }else{
-                     result[productInfo[i].name] = userResult[i][0]
+                     result[newProductInfo[i].name] = userResult[i][0]
                  }
              }else{
-                 if(lastResult["."+productInfo[i].name] ==undefined){
-                     if(userResult[i][0] != lastResult[productInfo[i].name]){
-                         result[productInfo[i].name] = userResult[i][0]
-                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
+                 if(lastResult["."+newProductInfo[i].name] ==undefined){
+                     if(userResult[i][0] != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = userResult[i][0]
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[productInfo[i].name] = userResult[i][0]
+                         result[newProductInfo[i].name] = userResult[i][0]
                      }
                  }else{
-                     if(userResult[i][0] != lastResult[productInfo[i].name]){
-                         result[productInfo[i].name] = userResult[i][0]
-                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
+                     if(userResult[i][0] != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = userResult[i][0]
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[productInfo[i].name] = userResult[i][0]
+                         result[newProductInfo[i].name] = userResult[i][0]
                      }
                  }
              }
          }
         //  label
-         if(productInfo[i].attributeUnitType == 5){
+         if(newProductInfo[i].attributeUnitType == 5){
              if(isEmptyObject(lastResult)){
-                 if(productInfo[i].attributeValue != productInfo[i].default){
-                      result[productInfo[i].name] = productInfo[i].attributeValue
-                       result["."+productInfo[i].name] = productInfo[i].default
+                 if(newProductInfo[i].attributeValue != newProductInfo[i].default){
+                      result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                       result["."+newProductInfo[i].name] = newProductInfo[i].default
                  }else{
-                     result[productInfo[i].name] = productInfo[i].attributeValue
+                     result[newProductInfo[i].name] = newProductInfo[i].attributeValue
                  }
              }else{
-                 if(lastResult["."+productInfo[i].name] ==undefined){
-                     if(productInfo[i].attributeValue != lastResult[productInfo[i].name]){
-                         result[productInfo[i].name] = productInfo[i].attributeValue
-                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
+                 if(lastResult["."+newProductInfo[i].name] ==undefined){
+                     if(newProductInfo[i].attributeValue != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[productInfo[i].name] = productInfo[i].attributeValue
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
                      }
                  }else{
-                     if(productInfo[i].attributeValue != lastResult[productInfo[i].name]){
-                         result[productInfo[i].name] = productInfo[i].attributeValue
-                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
+                     if(newProductInfo[i].attributeValue != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[productInfo[i].name] = productInfo[i].attributeValue
+                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
                      }
                  }
              }
          }
-     }
  }
   return result
 }
@@ -145,8 +152,20 @@ function getPrice(result){
       success: function(res){
         // success
         console.log(res.data)
+        return res.data
       },
     })
+}
+function showDialog(){
+  wx.showToast({
+  title: '加载中',
+  icon: 'loading',
+  duration: 10000
+})
+
+setTimeout(function(){
+  wx.hideToast()
+},2000)
 }
 function isEmptyObject(obj) {
   for (var key in obj) {
@@ -156,3 +175,4 @@ function isEmptyObject(obj) {
 }
 module.exports.getUserResult = getUserResult
 exports.getPrice = getPrice
+exports.showDialog = showDialog
