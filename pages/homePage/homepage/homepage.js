@@ -33,7 +33,6 @@ Page({
       for(var js2 in res.data){
         length++;
       }
-      console.log(length)
       for(var i=0;i<length-1;i++){
         if(res.data[i]==undefined){length++}else{
         var attributeValueindexList =[] //attributeValueindex初始化
@@ -51,8 +50,6 @@ Page({
         //radio
         if(res.data[i].attributeUnitType == 2){
           for(var j=0;j<res.data[i].attributeValue.length;j++){
-            console.log(res.data[i].attributeValue[j])
-            console.log(res.data[i].default)
             if(res.data[i].attributeValue[j]==res.data[i].default){
               attributeValueindexList.push(j)
             }
@@ -97,9 +94,6 @@ Page({
         userResult:that.data.userResult,
         caculateResult:res.data.defaultPrice
       })
-      console.log(that.data.attributeName)
-      console.log(that.data.attributeUnitType)
-      console.log(that.data.userResult)
       console.log(that.data.attributeValue)
     }
     })

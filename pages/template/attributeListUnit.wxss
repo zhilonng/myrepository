@@ -41,6 +41,7 @@
     width: 120rpx;
     height: 60rpx;
     margin-left: 15rpx;
+    margin-bottom:15rpx;
     border:1rpx #1AAD19 solid;
     font-size: 12px;
     color: #FFFFFF;

@@ -12,28 +12,25 @@ function getUserResult(productInfo,userResult,lastResult) {
          if(productInfo[i].attributeUnitType == 1){
              for(var j=0;j<userResult[i].length;j++){
                  if(userResult[i][j] == "tp_pressattributeValue"){
-                     console.log(isEmptyObject(lastResult))
                      if(isEmptyObject(lastResult)){
                         if(productInfo[i].attributeValue[j] != productInfo[i].default){
-                result["."+productInfo[i].name] = productInfo[i].attributeValue[j]
-                result[productInfo[i].name]=productInfo[i].default
+                result[productInfo[i].name] = productInfo[i].attributeValue[j]
+                result["."+productInfo[i].name]=productInfo[i].default
                      }else{
                 result[productInfo[i].name]=productInfo[i].attributeValue[j]
                      }
                      }else{
-                         console.log(productInfo[i].attributeValue[j])
-                         console.log(lastResult[productInfo[i].name])
                          if(lastResult["."+productInfo[i].name] ==undefined){
                          if(productInfo[i].attributeValue[j] != lastResult[productInfo[i].name]){
-                result["."+productInfo[i].name] = productInfo[i].attributeValue[j]
-                result[productInfo[i].name]=lastResult[productInfo[i].name]
+                result[productInfo[i].name] = productInfo[i].attributeValue[j]
+                result["."+productInfo[i].name]=lastResult[productInfo[i].name]
                      }else{
                 result[productInfo[i].name]=productInfo[i].attributeValue[j]
                      }
                      }else{
-                         if(productInfo[i].attributeValue[j] != lastResult["."+productInfo[i].name]){
-                result["."+productInfo[i].name] = productInfo[i].attributeValue[j]
-                result[productInfo[i].name]=lastResult["."+productInfo[i].name]
+                         if(productInfo[i].attributeValue[j] != lastResult[productInfo[i].name]){
+                result[productInfo[i].name] = productInfo[i].attributeValue[j]
+                result["."+productInfo[i].name]=lastResult[productInfo[i].name]
                      }else{
                 result[productInfo[i].name]=productInfo[i].attributeValue[j]
                      }
@@ -50,26 +47,23 @@ function getUserResult(productInfo,userResult,lastResult) {
          if(productInfo[i].attributeUnitType == 2){
              if(isEmptyObject(lastResult)){
                  if(productInfo[i].attributeValue[userResult[i][0]] != productInfo[i].default){
-                     console.log("1")
-                     console.log(productInfo[i].attributeValue[userResult[i][0]])
-                     console.log(productInfo[i].default)
-                      result["."+productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
-                       result[productInfo[i].name] = productInfo[i].default
+                      result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
+                       result["."+productInfo[i].name] = productInfo[i].default
                  }else{
                      result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
                  }
              }else{
                  if(lastResult["."+productInfo[i].name] ==undefined){
                      if(productInfo[i].attributeValue[userResult[i][0]] != lastResult[productInfo[i].name]){
-                         result["."+productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
-                       result[productInfo[i].name] = lastResult[productInfo[i].name]
+                         result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
+                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
                      }else{
                          result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
                      }
                  }else{
-                     if(productInfo[i].attributeValue[userResult[i][0]] != lastResult["."+productInfo[i].name]){
-                         result["."+productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
-                       result[productInfo[i].name] = lastResult["."+productInfo[i].name]
+                     if(productInfo[i].attributeValue[userResult[i][0]] != lastResult[productInfo[i].name]){
+                         result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
+                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
                      }else{
                          result[productInfo[i].name] = productInfo[i].attributeValue[userResult[i][0]]
                      }
@@ -80,23 +74,23 @@ function getUserResult(productInfo,userResult,lastResult) {
          if(productInfo[i].attributeUnitType == 4){
              if(isEmptyObject(lastResult)){
                  if(userResult[i][0] != productInfo[i].default){
-                      result["."+productInfo[i].name] = userResult[i][0]
-                       result[productInfo[i].name] = productInfo[i].default
+                      result[productInfo[i].name] = userResult[i][0]
+                       result["."+productInfo[i].name] = productInfo[i].default
                  }else{
                      result[productInfo[i].name] = userResult[i][0]
                  }
              }else{
                  if(lastResult["."+productInfo[i].name] ==undefined){
                      if(userResult[i][0] != lastResult[productInfo[i].name]){
-                         result["."+productInfo[i].name] = userResult[i][0]
-                       result[productInfo[i].name] = lastResult[productInfo[i].name]
+                         result[productInfo[i].name] = userResult[i][0]
+                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
                      }else{
                          result[productInfo[i].name] = userResult[i][0]
                      }
                  }else{
-                     if(userResult[i][0] != lastResult["."+productInfo[i].name]){
-                         result["."+productInfo[i].name] = userResult[i][0]
-                       result[productInfo[i].name] = lastResult["."+productInfo[i].name]
+                     if(userResult[i][0] != lastResult[productInfo[i].name]){
+                         result[productInfo[i].name] = userResult[i][0]
+                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
                      }else{
                          result[productInfo[i].name] = userResult[i][0]
                      }
@@ -107,23 +101,23 @@ function getUserResult(productInfo,userResult,lastResult) {
          if(productInfo[i].attributeUnitType == 5){
              if(isEmptyObject(lastResult)){
                  if(productInfo[i].attributeValue != productInfo[i].default){
-                      result["."+productInfo[i].name] = productInfo[i].attributeValue
-                       result[productInfo[i].name] = productInfo[i].default
+                      result[productInfo[i].name] = productInfo[i].attributeValue
+                       result["."+productInfo[i].name] = productInfo[i].default
                  }else{
                      result[productInfo[i].name] = productInfo[i].attributeValue
                  }
              }else{
                  if(lastResult["."+productInfo[i].name] ==undefined){
                      if(productInfo[i].attributeValue != lastResult[productInfo[i].name]){
-                         result["."+productInfo[i].name] = productInfo[i].attributeValue
-                       result[productInfo[i].name] = lastResult[productInfo[i].name]
+                         result[productInfo[i].name] = productInfo[i].attributeValue
+                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
                      }else{
                          result[productInfo[i].name] = productInfo[i].attributeValue
                      }
                  }else{
-                     if(productInfo[i].attributeValue != lastResult["."+productInfo[i].name]){
-                         result["."+productInfo[i].name] = productInfo[i].attributeValue
-                       result[productInfo[i].name] = lastResult["."+productInfo[i].name]
+                     if(productInfo[i].attributeValue != lastResult[productInfo[i].name]){
+                         result[productInfo[i].name] = productInfo[i].attributeValue
+                       result["."+productInfo[i].name] = lastResult[productInfo[i].name]
                      }else{
                          result[productInfo[i].name] = productInfo[i].attributeValue
                      }
