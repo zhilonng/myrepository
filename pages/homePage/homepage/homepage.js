@@ -3,6 +3,7 @@ var common = require('../../template/common.js')
 
 Page({
   data:{
+    goods_type_priceonly:"",
     lastResult:{},
     productInfo:[],
     attributeName:[],
@@ -17,9 +18,9 @@ Page({
     caculateResult:6990,
   },
   onLoad:function(options){
+    console.log(options)
     // 页面初始化 options为页面跳转所带来的参数
     var that = this
-
 // 获取保险参数并完成初始化
     wx.request({
     url: 'https://baby.mamid.cn/Caculate/Goods/getGoods/goods_goods_type_id/'+options.goods_goods_type_id, 
@@ -80,6 +81,10 @@ Page({
           res.data[i].attributeValue.splice(1,1,endTime)
           attributeValueindexList.push(res.data[i].default)
         }
+        //label
+        if(res.data[i].attributeUnitType == 5){
+          attributeValueindexList.push(res.data[i].attributeValue)
+        }
         that.data.attributeValue.push(res.data[i].attributeValue)
         that.data.userResult.push(attributeValueindexList)
         that.data.attributeName.push(res.data[i].attributeName)
@@ -92,7 +97,8 @@ Page({
         attributeUnitType:that.data.attributeUnitType,
         attributeValue:that.data.attributeValue,
         userResult:that.data.userResult,
-        caculateResult:res.data.defaultPrice
+        caculateResult:res.data.defaultPrice,
+        goods_type_priceonly:options.goods_type_priceonly
       })
       console.log(that.data.attributeValue)
     }
@@ -157,7 +163,7 @@ Page({
     })
 
     // 刷新价格
-    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -171,9 +177,11 @@ Page({
       success: function(res){
         // success
         console.log(res.data)
+        var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
         lastResult:result,
-        caculateResult:res.data
+        caculateResult:res.data.defaultPrice,
+        userResult:newUserResult
       })
          wx.hideToast()
       },
@@ -279,7 +287,7 @@ Page({
     })
 
     // 刷新价格
-    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -293,9 +301,11 @@ Page({
       success: function(res){
         // success
         console.log(res.data)
+        var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
         lastResult:result,
-        caculateResult:res.data
+        caculateResult:res.data.defaultPrice,
+        userResult:newUserResult
       })
         wx.hideToast()
       },
@@ -311,7 +321,7 @@ Page({
       userResult:that.data.userResult
     })
     // 刷新价格
-    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult)
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -325,9 +335,11 @@ Page({
       success: function(res){
         // success
         console.log(res.data)
+        var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
         lastResult:result,
-        caculateResult:res.data
+        caculateResult:res.data.defaultPrice,
+        userResult:newUserResult
       })
         wx.hideToast()
        },

@@ -43,7 +43,7 @@
 </view>
 <!--label布局-->
 <view wx:if="{{attributeUnitType[index]==5}}" class="tp_as_attributeValueSet" >
-<view class="tp_lb_attributeValue">{{attributeValue[index]}}</view>
+<view class="tp_lb_attributeValue">{{userResult[index][0]}}</view>
 </view>
 
 </view>
