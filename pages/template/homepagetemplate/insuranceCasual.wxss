@@ -1,0 +1,38 @@
+.insuranceContainer{
+    display: flex;
+    flex-direction: row;
+    margin-top:20rpx; 
+    width: 100%;
+    height: 300rpx;
+    align-items: flex-end;
+}
+.insurancePhoto{
+    position: absolute;
+    width: 100%;
+    height: 300rpx;
+    z-index: -1;
+}
+.insuranceNameAndPrice{
+    background: #FFFFFF;
+    filter:alpha(opacity=90);  
+    -moz-opacity:0.9;  
+    -khtml-opacity: 0.9;  
+    opacity: 0.9;  
+    width: 100%;
+    height: 80rpx;
+    display: flex;
+    z-index: 9999;
+}
+.insuranceName{
+    width: 70%;
+    margin-left: 10rpx;
+    line-height: 80rpx; 
+    color: #111;
+}
+.insurancePrice{
+    width: 30%;
+    text-align: right;
+    margin-right: 10rpx;
+    line-height: 80rpx; 
+    color:red;
+}

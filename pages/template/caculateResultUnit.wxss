@@ -1,6 +1,6 @@
 .tp_caculateResultUnitContainer{
     position: fixed;
-    bottom: 25rpx;
+    bottom: 18rpx;
     height: 102rpx;
     width: 100%;
     z-index: 9999;

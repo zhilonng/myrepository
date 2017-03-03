@@ -1,1 +1,16 @@
 /* pages/insuranceCaculator/insuranceCaculator.wxss */
+@import "../template/attributeListUnit.wxss";
+@import "../template/exceptionUnit.wxss";
+@import "../template/caculateResultUnit.wxss";
+page{
+    height: 100%;
+    background: #eeeeee;
+}
+.bottom{
+    height: 300rpx;
+}
+.lb_attributeValue{
+    margin-left: 15rpx;
+    height: 100%;
+    line-height: 155%;
+}

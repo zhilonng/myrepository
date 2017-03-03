@@ -1,0 +1,14 @@
+<template name="insuranceClassify">
+<view wx:for="{{insuranceClassify_name}}" data-index="{{index}}"  bindtap="turnToInsuranceClassify">
+<view class="tp_insuranceClassify_container">
+<view class="tp_insuranceClassify_photo"></view>
+<view class="tp_insuranceClassify_summary">
+<view class="tp_insuranceClassify_name">{{item}}
+</view>
+<view class="tp_insuranceClassify_recommend">保一辈子，身故拿保额，100%能赔付。中高收入家庭养老和遗产规划最佳选择
+</view>
+</view>
+</view>
+<view class="tp_insuranceClassify_line"></view>
+</view>
+</template>

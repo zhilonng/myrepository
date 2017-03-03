@@ -1,0 +1,3 @@
+<!--pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList.wxml-->
+<import src="../../template/homepagetemplate/insuranceCasual" />
+<template is="insuranceCasual" data="{{productInfo,productName}}" />

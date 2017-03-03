@@ -1,0 +1,38 @@
+.tp_insuranceClassify_container{
+    width: 100%;
+    margin-top: 40rpx;
+    margin-bottom: 40rpx;
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+}
+.tp_insuranceClassify_photo{
+    width: 20%;
+    margin-left: 20rpx;
+    height: 150rpx;
+    background: #999;
+}
+.tp_insuranceClassify_summary{
+    line-height: 100%;
+    display: flex;
+    flex-direction:column;
+    width: 80%;
+    margin-left: 25rpx;
+}
+.tp_insuranceClassify_line{
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    width: 90%;
+    height: 3rpx;
+    background: #DCDCDC;
+}
+.tp_insuranceClassify_name{
+    margin-top: 10rpx;
+    text-align: left;
+    font-size: 45rpx;
+}
+.tp_insuranceClassify_recommend{
+    margin-top: 15rpx;
+    font-size: 32rpx;
+    color: #999999;
+}

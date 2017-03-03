@@ -1,14 +1,14 @@
 {
   "pages":[
-    "pages/homePage/insurancetypepage/insurancetypepage",
-    "pages/homePage/homepage/homepage",
+    "pages/homePage/insurancehomepage/insurancehomepage",
     "pages/logs/logs",
-    "pages/insuranceCaculator/insuranceCaculator"
+    "pages/insuranceCaculator/insuranceCaculator",
+    "pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "保费计算器",
     "navigationBarTextStyle":"black"
   }
 }

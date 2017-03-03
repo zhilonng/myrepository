@@ -1,6 +1,11 @@
 // common.js
 // 获取用户保险数据并封装为result对象
 function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
+//     console.log("=================")
+//   console.log(productInfo)
+//   console.log(userResult)
+//   console.log(lastResult)
+//   console.log(goods_type_priceonly)
   var result ={}
   var length = 0
   var newProductInfo = []
@@ -29,12 +34,12 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
                          if(lastResult["."+newProductInfo[i].name] ==undefined){
                          if(newProductInfo[i].attributeValue[j] != lastResult[newProductInfo[i].name]){
                 result[newProductInfo[i].name] = newProductInfo[i].attributeValue[j]
-                result["."+newProductInfo[i].name]=lastResult[productInfo[i].name]
+                result["."+newProductInfo[i].name]=lastResult[newProductInfo[i].name]
                      }else{
                 result[newProductInfo[i].name]=newProductInfo[i].attributeValue[j]
                      }
                      }else{
-                         if(newProductInfo[i].attributeValue[j] != lastResult[productInfo[i].name]){
+                         if(newProductInfo[i].attributeValue[j] != lastResult[newProductInfo[i].name]){
                 result[newProductInfo[i].name] = newProductInfo[i].attributeValue[j]
                 result["."+newProductInfo[i].name]=lastResult[newProductInfo[i].name]
                      }else{
@@ -140,7 +145,7 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
 // 发送result对象并请求结果
 function getPrice(result){
     
-    console.log(JSON.stringify(result))
+    // console.log(JSON.stringify(result))
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -160,11 +165,11 @@ function getPrice(result){
 }
 
 function reviseData(res,userResult,attributeName,productInfo){
-    console.log("=====")
-    console.log(productInfo)
-    console.log(res)
-    console.log(userResult)
-    console.log(attributeName)
+    // console.log("=====")
+    // console.log(productInfo)
+    // console.log(res)
+    // console.log(userResult)
+    // console.log(attributeName)
     var length = 0
     for(var js2 in res){
     length++;
@@ -206,7 +211,56 @@ function reviseData(res,userResult,attributeName,productInfo){
         return userResult
     }
 }
-
+function revisePremium(res,productInfo,attributeValue,userResult){
+    
+    var length = 0
+    var res_length = 0 
+    var premium_index = 0 //premiumExemption的下标
+    var newProductInfo = []
+    for(var js2 in productInfo){
+    length++;
+    }
+    for(var js3 in res){
+        res_length++
+    }
+    for(var j=0;j<res_length-1;j++){
+        if(res[j]==undefined){res_length++}
+        else{
+            if(res[j].name == "premiumExemption"){
+                premium_index = j
+            }
+        }
+    }
+ for(var i=0;i<length-1;i++){
+     if(productInfo[i] == undefined){length++}
+     else{
+         if(premium_index != 0)
+         if(productInfo[i].name=="premiumExemption"){
+             productInfo[i] = res[premium_index]
+         }
+         newProductInfo.push(productInfo[i])
+     }
+ }
+ for(var k=0;k<newProductInfo.length;k++){
+     if(newProductInfo[k].name=="premiumExemption"){
+         attributeValue.splice(k,1,newProductInfo[k].attributeValue)
+         var a = []
+         for(var m=0;m<attributeValue[k].length;m++){
+             if(attributeValue[k][m] == newProductInfo[k].default){
+                 a.push("tp_pressattributeValue")
+             }else{
+                 a.push("tp_attributeValue")
+             }
+         }
+         userResult.splice(k,1,a)
+     }
+ }
+ var b=[]
+ b.push(productInfo)
+ b.push(attributeValue)
+ b.push(userResult)
+ return b
+}
 function showDialog(){
   wx.showToast({
   title: '加载中',
@@ -228,3 +282,4 @@ module.exports.getUserResult = getUserResult
 exports.getPrice = getPrice
 exports.showDialog = showDialog
 exports.reviseData = reviseData
+exports.revisePremium = revisePremium

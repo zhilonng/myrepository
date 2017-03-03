@@ -1,0 +1,2 @@
+/* pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList.wxss */
+@import "../../template/homepagetemplate/insuranceCasual.wxss";
