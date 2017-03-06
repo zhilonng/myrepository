@@ -7,6 +7,7 @@ Page( {
     /** 
         * 页面配置 
         */  
+    casusalHeight:0,
     winWidth: 0,  
     winHeight: 0,  
     // tab切换  
@@ -33,7 +34,9 @@ Page( {
       }
       that.setData({
         productName:that.data.productName,
-        productInfo:res.data
+        productInfo:res.data,
+        winHeight: (res.data.length)*128+34,
+        casusalHeight:(res.data.length)*128+34
       })
     }
     })
@@ -44,8 +47,7 @@ Page( {
     wx.getSystemInfo({
       success: function(res){  
         that.setData({
-          winWidth: res.windowWidth,  
-          winHeight: res.windowHeight  
+          winWidth: res.windowWidth,   
         });  
       }  
     });  
@@ -58,6 +60,11 @@ Page( {
     var that = this;  
     that.setData({currentTab: e.detail.current});  
 
+   if(e.detail.current == 0){
+     that.setData({
+       winHeight:that.data.casusalHeight
+     })
+   }
     if(e.detail.current == 1 && that.data.insuranceClassify_name.length == 0){
       common.showDialog()
       var that = this;  
@@ -73,9 +80,11 @@ Page( {
       for(var i=0;i<res.data.length;i++){
         that.data.insuranceClassify_name.push(res.data[i].category_name)
       }
+      console.log("length:"+res.data.length)
       that.setData({
       insuranceClassify_name:that.data.insuranceClassify_name,
-      insuranceClassify_info:res.data
+      insuranceClassify_info:res.data,
+      winHeight: (res.data.length)*110+34
       })
       wx.hideToast()
     }
@@ -97,9 +106,11 @@ Page( {
       for(var i=0;i<res.data.length;i++){
         that.data.insuranceCompany_name.push(res.data[i].company_name)
       }
+      console.log("length:"+res.data.length)
       that.setData({
       insuranceCompany_name:that.data.insuranceCompany_name,
-      insuranceCompany_info:res.data
+      insuranceCompany_info:res.data,
+      winHeight: (res.data.length)*102+34
       })
       wx.hideToast()
     }

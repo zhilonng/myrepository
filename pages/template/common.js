@@ -48,7 +48,12 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
                      }
                      }
                      if(newProductInfo[i].name == "insureAgeLimit"){
+                         console.log(typeof(newProductInfo[i].goodsCode)=="string")
+                         if(typeof(newProductInfo[i].goodsCode)=="string"){
+                             result["goodsCode"] = newProductInfo[i].goodsCode
+                         }else{
                     result["goodsCode"] = newProductInfo[i].goodsCode[j]
+                         }
                     if(goods_type_priceonly == "1"){
                          result["codeCode"] = newProductInfo[i].goodsCode[j]
                      }

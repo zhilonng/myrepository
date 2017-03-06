@@ -1,10 +1,6 @@
 /* pages/homePage/insurancehomepage/insurancehomepage.wxss */
 @import "../../template/homepagetemplate/insuranceCasual.wxss";
 @import "../../template/homepagetemplate/insuranceClassify.wxss";
-page{
-    height: 100%;
-    background: #ffffff;
-}
 .swiper-tab{  
     width: 100%;  
     border-top:  2rpx solid #F5F5F5;
