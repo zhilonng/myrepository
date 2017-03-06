@@ -24,6 +24,7 @@
     z-index: 9999;
 }
 .insuranceName{
+    font-size: 30rpx;
     width: 70%;
     margin-left: 10rpx;
     line-height: 80rpx; 

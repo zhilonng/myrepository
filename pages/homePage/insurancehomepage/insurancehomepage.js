@@ -35,8 +35,8 @@ Page( {
       that.setData({
         productName:that.data.productName,
         productInfo:res.data,
-        winHeight: (res.data.length)*128+34,
-        casusalHeight:(res.data.length)*128+34
+        winHeight: (res.data.length+1)*128+34,
+        casusalHeight:(res.data.length+1)*128+34
       })
     }
     })
