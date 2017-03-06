@@ -90,6 +90,33 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
                  }
              }
          }
+        //  普通选择器
+        if(newProductInfo[i].attributeUnitType == 6){
+             if(isEmptyObject(lastResult)){
+                 if(userResult[i][0] != newProductInfo[i].default){
+                      result[newProductInfo[i].name] = userResult[i][0]
+                       result["."+newProductInfo[i].name] = newProductInfo[i].default
+                 }else{
+                     result[newProductInfo[i].name] = userResult[i][0]
+                 }
+             }else{
+                 if(lastResult["."+newProductInfo[i].name] ==undefined){
+                     if(userResult[i][0] != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = userResult[i][0]
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
+                     }else{
+                         result[newProductInfo[i].name] = userResult[i][0]
+                     }
+                 }else{
+                     if(userResult[i][0] != lastResult[newProductInfo[i].name]){
+                         result[newProductInfo[i].name] = userResult[i][0]
+                       result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
+                     }else{
+                         result[newProductInfo[i].name] = userResult[i][0]
+                     }
+                 }
+             }
+         }
         //  时间选择器
          if(newProductInfo[i].attributeUnitType == 4){
              if(isEmptyObject(lastResult)){
@@ -170,11 +197,11 @@ function getPrice(result){
 }
 
 function reviseData(res,userResult,attributeName,productInfo){
-    // console.log("=====")
-    // console.log(productInfo)
-    // console.log(res)
-    // console.log(userResult)
-    // console.log(attributeName)
+    console.log("=====")
+    console.log(productInfo)
+    console.log(res)
+    console.log(userResult)
+    console.log(attributeName)
     var length = 0
     for(var js2 in res){
     length++;
@@ -188,9 +215,11 @@ function reviseData(res,userResult,attributeName,productInfo){
                     console.log(j)
                     //方格式布局
                     if(res[i].attributeUnitType == 1){
+                        if(productInfo[0].default == "趸交"){}else{
                         for(var k=0;k<productInfo[i].attributeValue.length;k++){
                             if(productInfo[i].attributeValue[k]==res[i].default){userResult[j].splice(k,1,"tp_pressattributeValue")}
                             else{userResult[j].splice(k,1,"tp_attributeValue")}
+                        }
                         }
                     }
                     //ridio
@@ -200,6 +229,10 @@ function reviseData(res,userResult,attributeName,productInfo){
                                 userResult[j].splice(0,1,k)
                             }
                         }
+                    }
+                    //普通选择器
+                    if(res[i].attributeUnitType == 6){
+                        userResult[j].splice(0,1,res[i].default)
                     }
                     //时间选择器
                     if(res[i].attributeUnitType == 4){

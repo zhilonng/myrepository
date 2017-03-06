@@ -8,6 +8,8 @@ Page( {
         * 页面配置 
         */  
     casusalHeight:0,
+    insuranceClassifyHeight:0,
+    insuranceCompanyHeight:0,
     winWidth: 0,  
     winHeight: 0,  
     // tab切换  
@@ -35,8 +37,8 @@ Page( {
       that.setData({
         productName:that.data.productName,
         productInfo:res.data,
-        winHeight: (res.data.length+1)*128+34,
-        casusalHeight:(res.data.length+1)*128+34
+        winHeight: (res.data.length+1)*305+80,
+        casusalHeight:(res.data.length+1)*305+80
       })
     }
     })
@@ -84,11 +86,18 @@ Page( {
       that.setData({
       insuranceClassify_name:that.data.insuranceClassify_name,
       insuranceClassify_info:res.data,
-      winHeight: (res.data.length)*110+34
+      winHeight: (res.data.length)*230+150,
+      insuranceClassifyHeight:(res.data.length)*230+150
       })
       wx.hideToast()
     }
     })
+    }else{
+      if(e.detail.current == 1){
+        that.setData({
+          winHeight:that.data.insuranceClassifyHeight
+        })
+      }
     }
 
     if(e.detail.current == 2 && that.data.insuranceCompany_name.length == 0){
@@ -110,11 +119,18 @@ Page( {
       that.setData({
       insuranceCompany_name:that.data.insuranceCompany_name,
       insuranceCompany_info:res.data,
-      winHeight: (res.data.length)*102+34
+      winHeight: (res.data.length)*230+150,
+      insuranceCompanyHeight:(res.data.length)*230+150,
       })
       wx.hideToast()
     }
     })
+    }else{
+      if(e.detail.current == 2){
+        that.setData({
+          winHeight:that.data.insuranceCompanyHeight
+        })
+      }
     }
   },  
   /** 

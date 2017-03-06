@@ -58,6 +58,12 @@ Page({
             }
           }
         }
+        // 普通选择器
+        if(res.data[i].attributeUnitType == 6){
+          for(var j=0;j<res.data[i].attributeValue.length;j++){
+              attributeValueindexList.push(res.data[i].default)
+          }
+        }
         // 地区选择器
         if(res.data[i].attributeUnitType ==3){
           //获取area一级目录，完成数据初始化
@@ -355,6 +361,43 @@ Page({
        },
     })
     
+  },
+  // 普通选择器
+  bindPickerChange:function(e){
+    console.log(e)
+    var that = this
+    common.showDialog()
+    var number = that.data.attributeValue[e.target.dataset.pkindex][e.detail.value]
+     that.data.userResult[e.target.dataset.pkindex].splice(0,1,number)
+     that.setData({
+       userResult:that.data.userResult
+     })
+
+     // 刷新价格
+    var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
+    console.log(result)
+    wx.request({
+      url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
+      header: {
+            "Content-Type": "application/x-www-form-urlencoded"
+            },
+      data: {
+          result:JSON.stringify(result)
+      },
+      method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+      // header: {}, // 设置请求的 header
+      success: function(res){
+        // success
+        console.log(res.data)
+        var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
+        that.setData({
+        lastResult:result,
+        caculateResult:res.data.defaultPrice,
+        userResult:newUserResult
+      })
+        wx.hideToast()
+      },
+    })
   },
   // 点击计算事件
   resultCaculateHandle:function(){

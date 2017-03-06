@@ -34,9 +34,19 @@
 <!--日期选择器-->
 <view wx:if="{{attributeUnitType[index]==4}}" class="tp_as_attributeValueSet" >
 <view class="section">
-  <picker mode="date" value="{{userResult[index][0]}}" start="{{attributeValue[index][0]}}" end="{{attributeValue[index][1]}}" data-index="{{index}}" bindchange="bindDateChange">
+  <picker mode="date" value="{{userResult[index][0]}}" start="attributeValue[index][0]" end="{{attributeValue[index][1]}}" data-index="{{index}}" bindchange="bindDateChange">
     <view class="picker">
     {{userResult[index][0]}}
+    </view>
+  </picker>
+</view>
+</view>
+<!--普通选择器-->
+<view wx:if="{{attributeUnitType[index]==6}}" class="tp_as_attributeValueSet">
+  <view class="section">
+  <picker  value="{{userResult[index][0]}}" range="{{attributeValue[index]}}" wx:for-index="pkIndex" data-pkindex="{{index}}" bindchange="bindPickerChange">
+  <view class="picker">
+      {{userResult[index][0]}}份
     </view>
   </picker>
 </view>
@@ -45,6 +55,5 @@
 <view wx:if="{{attributeUnitType[index]==5}}" class="tp_as_attributeValueSet" >
 <view class="tp_lb_attributeValue">{{userResult[index][0]}}</view>
 </view>
-
 </view>
 </template>

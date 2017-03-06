@@ -25,13 +25,13 @@
 }
 .insuranceName{
     font-size: 30rpx;
-    width: 70%;
+    width: 75%;
     margin-left: 10rpx;
     line-height: 80rpx; 
     color: #111;
 }
 .insurancePrice{
-    width: 30%;
+    width: 25%;
     text-align: right;
     margin-right: 10rpx;
     line-height: 80rpx; 

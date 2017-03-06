@@ -9,11 +9,13 @@
     line-height: 80rpx;
     position: fixed;
     z-index: 9999;
+    margin-top: -5rpx;
     }  
 .swiper-tab-list{  font-size: 30rpx;  
     display: inline-block;  
     width: 33.33%;  
-    color: #777777;  
+    color: #777777;
+    background: #FFF; 
 }  
 .on{ color: #1AAD19;  
     }  
