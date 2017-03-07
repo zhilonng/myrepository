@@ -20,7 +20,7 @@ Page({
     caculateResult:'',
   },
   onLoad:function(options){
-    console.log(options)
+    // console.log(options)
     // 页面初始化 options为页面跳转所带来的参数
     var that = this
 // 获取保险参数并完成初始化
@@ -30,13 +30,13 @@ Page({
         'content-type': 'application/json'
     },
     success: function(res) {
-      console.log(res.data)
+      // console.log(res.data)
       that.data.caculateResult = res.data.defaultPrice
       var length = 0
       for(var js2 in res.data){
         length++;
       }
-      for(var i=0;i<length-1;i++){
+      for(var i=0;i<length-2;i++){
         if(res.data[i]==undefined){length++}else{
         var attributeValueindexList =[] //attributeValueindex初始化
         var firstCatalogList = [];
@@ -73,7 +73,7 @@ Page({
             'content-type': 'application/json'
         },
         success: function(res) {
-          console.log(res.data)
+          // console.log(res.data)
         }
         })
         }
@@ -110,7 +110,7 @@ Page({
         caculateResult:res.data.defaultPrice,
         goods_type_priceonly:options.goods_type_priceonly
       })
-      console.log(that.data.attributeValue)
+      // console.log(that.data.attributeValue)
     }
     })
 
@@ -174,6 +174,8 @@ Page({
 
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
+    console.log(JSON.stringify(result))
+    if(JSON.stringify(result).indexOf('.') == -1){wx.hideToast()}else{
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -186,7 +188,7 @@ Page({
       // header: {}, // 设置请求的 header
       success: function(res){
         // success
-        console.log(res.data)
+        // console.log(res.data)
         var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
         lastResult:result,
@@ -196,10 +198,11 @@ Page({
          wx.hideToast()
       },
     })
+    }
   },
   // 一级目录数据修改与二级目录数据初始化
   evShowFirstStageAttribute:function(e){
-    console.log(e)
+    // console.log(e)
     var that = this
     console.log('picker发送选择改变，携带值为', e.detail.value)
     that.data.attributeValueindex[e.target.dataset.index].splice(0,1,that.data.attributeValue[e.target.dataset.index][0][e.detail.value])
@@ -298,6 +301,7 @@ Page({
 
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
+    if(JSON.stringify(result).indexOf('.') == -1){wx.hideToast()}else{
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -320,6 +324,7 @@ Page({
         wx.hideToast()
       },
     })
+    }
   },
   // radio点击事件
   radioClickHandler:function(e){
@@ -333,6 +338,7 @@ Page({
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
     console.log(result)
+    if(JSON.stringify(result).indexOf('.') == -1){wx.hideToast()}else{
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -360,11 +366,11 @@ Page({
         wx.hideToast()
        },
     })
-    
+    }
   },
   // 普通选择器
   bindPickerChange:function(e){
-    console.log(e)
+    // console.log(e)
     var that = this
     common.showDialog()
     var number = that.data.attributeValue[e.target.dataset.pkindex][e.detail.value]
@@ -375,7 +381,8 @@ Page({
 
      // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
-    console.log(result)
+    // console.log(result)
+    if(JSON.stringify(result).indexOf('.') == -1){wx.hideToast()}else{
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Goods/orderTrial',
       header: {
@@ -388,7 +395,7 @@ Page({
       // header: {}, // 设置请求的 header
       success: function(res){
         // success
-        console.log(res.data)
+        // console.log(res.data)
         var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
         lastResult:result,
@@ -398,6 +405,7 @@ Page({
         wx.hideToast()
       },
     })
+    }
   },
   // 点击计算事件
   resultCaculateHandle:function(){

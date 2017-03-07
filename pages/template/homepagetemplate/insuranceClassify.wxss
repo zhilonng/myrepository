@@ -24,7 +24,7 @@
     margin-right: 30rpx;
     width: 90%;
     height: 3rpx;
-    background: #DCDCDC;
+    background: #F5F5F5;
 }
 .tp_insuranceClassify_name{
     margin-top: 10rpx;

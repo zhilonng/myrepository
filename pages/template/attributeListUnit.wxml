@@ -46,7 +46,7 @@
   <view class="section">
   <picker  value="{{userResult[index][0]}}" range="{{attributeValue[index]}}" wx:for-index="pkIndex" data-pkindex="{{index}}" bindchange="bindPickerChange">
   <view class="picker">
-      {{userResult[index][0]}}份
+      {{userResult[index][0]}}
     </view>
   </picker>
 </view>

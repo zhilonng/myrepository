@@ -13,12 +13,12 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
     length++;
  }
  var length2 = length
- for(var k=0;k<length2-1;k++){
+ for(var k=0;k<length2-2;k++){
      if(productInfo[k] == undefined){length2++}else{
      newProductInfo.push(productInfo[k])
      }
  }
- for(var i=0;i<length-1;i++){
+ for(var i=0;i<length-2;i++){
          //方格类型
          if(newProductInfo[i].attributeUnitType == 1){
              for(var j=0;j<userResult[i].length;j++){
@@ -47,17 +47,17 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
                      }
                      }
                      }
-                     if(newProductInfo[i].name == "insureAgeLimit"){
-                         console.log(typeof(newProductInfo[i].goodsCode)=="string")
-                         if(typeof(newProductInfo[i].goodsCode)=="string"){
-                             result["goodsCode"] = newProductInfo[i].goodsCode
-                         }else{
-                    result["goodsCode"] = newProductInfo[i].goodsCode[j]
-                         }
-                    if(goods_type_priceonly == "1"){
-                         result["codeCode"] = newProductInfo[i].goodsCode[j]
-                     }
-                     }
+                    //  if(newProductInfo[i].name == "insureAgeLimit"){
+                    //      console.log(typeof(newProductInfo[i].goodsCode)=="string")
+                    //      if(typeof(newProductInfo[i].goodsCode)=="string"){
+                    //          result["goodsCode"] = newProductInfo[i].goodsCode
+                    //      }else{
+                    // result["goodsCode"] = newProductInfo[i].goodsCode[j]
+                    //      }
+                    // if(goods_type_priceonly == "1"){
+                    //      result["codeCode"] = newProductInfo[i].goodsCode[j]
+                    //  }
+                    //  }
                      
                      
                  }
@@ -148,30 +148,31 @@ function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
          if(newProductInfo[i].attributeUnitType == 5){
              if(isEmptyObject(lastResult)){
                  if(newProductInfo[i].attributeValue != newProductInfo[i].default){
-                      result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                      result[newProductInfo[i].name] = newProductInfo[i].default
                        result["."+newProductInfo[i].name] = newProductInfo[i].default
                  }else{
-                     result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                     result[newProductInfo[i].name] = newProductInfo[i].default
                  }
              }else{
                  if(lastResult["."+newProductInfo[i].name] ==undefined){
                      if(newProductInfo[i].attributeValue != lastResult[newProductInfo[i].name]){
-                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                         result[newProductInfo[i].name] = newProductInfo[i].default
                        result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                         result[newProductInfo[i].name] = newProductInfo[i].default
                      }
                  }else{
                      if(newProductInfo[i].attributeValue != lastResult[newProductInfo[i].name]){
-                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                         result[newProductInfo[i].name] = newProductInfo[i].default
                        result["."+newProductInfo[i].name] = lastResult[newProductInfo[i].name]
                      }else{
-                         result[newProductInfo[i].name] = newProductInfo[i].attributeValue
+                         result[newProductInfo[i].name] = newProductInfo[i].default
                      }
                  }
              }
          }
  }
+  result["caseCode"] = productInfo.caseCode
   return result
 }
 // 发送result对象并请求结果
@@ -197,22 +198,22 @@ function getPrice(result){
 }
 
 function reviseData(res,userResult,attributeName,productInfo){
-    console.log("=====")
-    console.log(productInfo)
-    console.log(res)
-    console.log(userResult)
-    console.log(attributeName)
+    // console.log("=====")
+    // console.log(productInfo)
+    // console.log(res)
+    // console.log(userResult)
+    // console.log(attributeName)
     var length = 0
     for(var js2 in res){
     length++;
     }
     if(length == 1){return userResult}
     else{
-        for(var i=0;i<length-1;i++){
+        for(var i=0;i<length-2;i++){
             if(res[i] == undefined){length++}else{
             for(var j=0;j<userResult.length;j++){
                 if(attributeName[j] == res[i].attributeName){
-                    console.log(j)
+                    // console.log(j)
                     //方格式布局
                     if(res[i].attributeUnitType == 1){
                         if(productInfo[0].default == "趸交"){}else{
@@ -250,7 +251,11 @@ function reviseData(res,userResult,attributeName,productInfo){
     }
 }
 function revisePremium(res,productInfo,attributeValue,userResult){
-    
+    // console.log("===---")
+    // console.log(res)
+    // console.log(productInfo)
+    // console.log(attributeValue)
+    // console.log(userResult)
     var length = 0
     var res_length = 0 
     var premium_index = 0 //premiumExemption的下标
@@ -269,7 +274,7 @@ function revisePremium(res,productInfo,attributeValue,userResult){
             }
         }
     }
- for(var i=0;i<length-1;i++){
+ for(var i=0;i<length-2;i++){
      if(productInfo[i] == undefined){length++}
      else{
          if(premium_index != 0)
