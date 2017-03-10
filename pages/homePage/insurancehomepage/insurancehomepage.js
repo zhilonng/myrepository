@@ -20,6 +20,10 @@ Page( {
     insuranceClassify_info:[],
     insuranceCompany_name:[],
     insuranceCompany_info:[],
+    insuranceClassify_photo:[],
+    insuranceCompany_photo:[],
+    insuranceClassify_desc:[],
+    insuranceCompany_desc:[]
   },  
   onLoad: function() {  
     var that = this;  
@@ -37,8 +41,8 @@ Page( {
       that.setData({
         productName:that.data.productName,
         productInfo:res.data,
-        winHeight: (res.data.length+1)*305+80,
-        casusalHeight:(res.data.length+1)*305+80
+        winHeight: (res.data.length+1)*310+80,
+        casusalHeight:(res.data.length+1)*310+80
       })
     }
     })
@@ -81,14 +85,19 @@ Page( {
       that.data.insuranceClassify_name.splice(0,that.data.insuranceClassify_name.length)
       for(var i=0;i<res.data.length;i++){
         that.data.insuranceClassify_name.push(res.data[i].category_name)
+        that.data.insuranceClassify_desc.push(res.data[i].category_desc)
+        that.data.insuranceClassify_photo.push(res.data[i].category_pic)
       }
       console.log("length:"+res.data.length)
       that.setData({
       insuranceClassify_name:that.data.insuranceClassify_name,
       insuranceClassify_info:res.data,
+      insuranceClassify_desc:that.data.insuranceClassify_desc,
+      insuranceClassify_photo:that.data.insuranceClassify_photo,
       winHeight: (res.data.length)*230+150,
       insuranceClassifyHeight:(res.data.length)*230+150
       })
+      console.log(that.data.insuranceClassify_photo)
       wx.hideToast()
     }
     })
@@ -114,11 +123,15 @@ Page( {
       that.data.insuranceCompany_name.splice(0,that.data.insuranceCompany_name.length)
       for(var i=0;i<res.data.length;i++){
         that.data.insuranceCompany_name.push(res.data[i].company_name)
+        that.data.insuranceCompany_desc.push(res.data[i].company_desc)
+        that.data.insuranceCompany_photo.push(res.data[i].company_pic)
       }
       console.log("length:"+res.data.length)
       that.setData({
       insuranceCompany_name:that.data.insuranceCompany_name,
       insuranceCompany_info:res.data,
+      insuranceCompany_desc:that.data.insuranceCompany_desc,
+      insuranceCompany_photo:that.data.insuranceCompany_photo,
       winHeight: (res.data.length)*230+150,
       insuranceCompanyHeight:(res.data.length)*230+150,
       })
@@ -201,16 +214,26 @@ Page( {
  turnToInsuranceClassify:function(e){
    var that = this
    var index=0
+   console.log(e)
    if(that.data.currentTab==1){
     index= that.data.insuranceClassify_info[e.currentTarget.dataset.index].category_id
    }else{
      index = that.data.insuranceCompany_info[e.currentTarget.dataset.index].company_id
    }
    wx.navigateTo({
-     url: '../../secondLevelPage/insuranceClassifyList/insuranceClassifyList?index='+index+"&currentTab="+that.data.currentTab,
+     url: '../../secondLevelPage/insuranceClassifyList/insuranceClassifyList?index='+index+"&currentTab="+that.data.currentTab+"&insurance="+e.currentTarget.dataset.insurancename,
      success: function(res){
        // success
      },
    })
- }
+ },
+
+  //分享
+  onShareAppMessage: function () {
+    var that = this
+    return {
+      title: '保费计算器-安心买保险',
+      path: '/pages/homePage/insurancehomepage/insurancehomepage'
+    }
+  }
 })  

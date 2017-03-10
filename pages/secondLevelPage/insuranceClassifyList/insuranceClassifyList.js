@@ -9,6 +9,12 @@ Page({
     var that = this
     console.log(options)
     if(options.currentTab == 1){
+      wx.setNavigationBarTitle({
+        title: options.insurance,
+        success: function(res) {
+          // success
+        }
+      })
     wx.request({
       url: 'https://baby.mamid.cn/Caculate/Product/categoryList/type_id/'+options.index,
       header: {
@@ -29,6 +35,12 @@ Page({
     })
     }
     if(options.currentTab == 2){
+       wx.setNavigationBarTitle({
+        title: options.insurance,
+        success: function(res) {
+          // success
+        }
+      })
       wx.request({
       url: 'https://baby.mamid.cn/Caculate/Product/CompanyList/company_id/'+options.index,
       header: {
@@ -85,4 +97,13 @@ Page({
       }
     })
   },
+
+    //分享
+  onShareAppMessage: function () {
+    var that = this
+    return {
+      title: '保费计算器-安心买保险',
+      path: '/pages/homePage/insurancehomepage/insurancehomepage'
+    }
+  }
 })

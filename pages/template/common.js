@@ -196,33 +196,111 @@ function getPrice(result){
       },
     })
 }
-
-function reviseData(res,userResult,attributeName,productInfo){
+function reviseAttribute(res,attributeValue,attributeName,productInfo,userReuslt){
     // console.log("=====")
     // console.log(productInfo)
     // console.log(res)
-    // console.log(userResult)
+    // console.log(attributeValue)
     // console.log(attributeName)
+    var length = 0
+    var product_length = 0
+    for(var js2 in res){
+    length++;
+    }
+    for(var js1 in productInfo){
+        product_length++;
+    }
+    if(length == 1){
+        var  a =  []
+    a.push(attributeValue)
+    a.push(productInfo)
+    a.push(userReuslt)
+    return a
+    }
+    else{
+        for(var i=0;i<length-1;i++){
+            if(res[i] == undefined){length++}else{
+                for(var j=0;j<attributeValue.length;j++){
+                    if(attributeName[j] == res[i].attributeName){
+                        if(typeof attributeValue[j] ==typeof res[i].attributeValue ){
+                        attributeValue.splice(j,1,res[i].attributeValue)
+                        var length3 = product_length
+                        for(var  k=0;k<length3-2;k++){
+                            if(productInfo[k]==undefined){length3++}else{
+                                if(productInfo[k].attributeName == attributeName[j]){
+                                    productInfo[k].attributeValue = res[i].attributeValue
+                                    productInfo[k].default = res[i].default
+                                if(productInfo[k].attributeUnitType == 1){
+                                    var b=[]
+                                    for(var p=0;p<productInfo[k].attributeValue.length;p++){
+                                        if(productInfo[k].attributeValue[p] == productInfo[k].default){
+                                            b.push("tp_pressattributeValue")
+                                        }else{
+                                            b.push("tp_attributeValue")
+                                        }
+                                        userReuslt.splice(j,1,b)
+                                    }
+                                }
+                                }
+                            }
+                        }
+                        
+                        }else{
+                        console.log(j)
+                        attributeValue[j].splice(0,1,res[i].attributeValue)
+                        attributeValue[j].splice(1,attributeValue[j].length)
+                        var length3 = product_length
+                        for(var  k=0;k<length3-2;k++){
+                            if(productInfo[k]==undefined){length3++}else{
+                                if(productInfo[k].attributeName == attributeName[j]){
+                                    productInfo[k].attributeValue[0] = res[i].attributeValue
+                                    productInfo[k].default = res[i].default
+                                    productInfo[k].attributeValue.splice(1,productInfo[k].attributeValue.length)
+                                }
+                            }
+                        }
+                        }
+                            
+
+                    }
+                }
+            }
+        }
+    }
+    var  a =  []
+    a.push(attributeValue)
+    a.push(productInfo)
+    a.push(userReuslt)
+    return a
+}
+
+function reviseData(res,userResult,attributeName,productInfo){
+    console.log("=====")
+    console.log(productInfo)
+    console.log(res)
+    console.log(userResult)
+    console.log(attributeName)
     var length = 0
     for(var js2 in res){
     length++;
     }
     if(length == 1){return userResult}
     else{
-        for(var i=0;i<length-2;i++){
+        for(var i=0;i<length-1;i++){
             if(res[i] == undefined){length++}else{
             for(var j=0;j<userResult.length;j++){
                 if(attributeName[j] == res[i].attributeName){
                     // console.log(j)
-                    //方格式布局
-                    if(res[i].attributeUnitType == 1){
-                        if(productInfo[0].default == "趸交"){}else{
-                        for(var k=0;k<productInfo[i].attributeValue.length;k++){
-                            if(productInfo[i].attributeValue[k]==res[i].default){userResult[j].splice(k,1,"tp_pressattributeValue")}
-                            else{userResult[j].splice(k,1,"tp_attributeValue")}
-                        }
-                        }
-                    }
+                    // //方格式布局
+                    // if(res[i].attributeUnitType == 1){
+                    //     if(productInfo[0].default == "趸交"){}else{
+                    //         console.log(i)
+                    //     for(var k=0;k<productInfo[i].attributeValue.length;k++){
+                    //         if(productInfo[i].attributeValue[k]==res[i].default){userResult[j].splice(k,1,"tp_pressattributeValue")}
+                    //         else{userResult[j].splice(k,1,"tp_attributeValue")}
+                    //     }
+                    //     }
+                    // }
                     //ridio
                     if(res[i].attributeUnitType == 2){
                         for(var k=0;k<productInfo[i].attributeValue.length;k++){
@@ -321,8 +399,13 @@ function isEmptyObject(obj) {
   }
   return true;
 }
+function timeout(){
+console.log("111")
+}
 module.exports.getUserResult = getUserResult
 exports.getPrice = getPrice
 exports.showDialog = showDialog
 exports.reviseData = reviseData
 exports.revisePremium = revisePremium
+exports.timeout = timeout
+exports.reviseAttribute = reviseAttribute

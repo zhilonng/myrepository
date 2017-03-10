@@ -30,7 +30,7 @@ Page({
         'content-type': 'application/json'
     },
     success: function(res) {
-      // console.log(res.data)
+       console.log(res.data)
       that.data.caculateResult = res.data.defaultPrice
       var length = 0
       for(var js2 in res.data){
@@ -60,9 +60,9 @@ Page({
         }
         // 普通选择器
         if(res.data[i].attributeUnitType == 6){
-          for(var j=0;j<res.data[i].attributeValue.length;j++){
+         
               attributeValueindexList.push(res.data[i].default)
-          }
+          
         }
         // 地区选择器
         if(res.data[i].attributeUnitType ==3){
@@ -77,7 +77,6 @@ Page({
         }
         })
         }
-        
         // 时间选择器
         if(res.data[i].attributeUnitType == 4){
           var today = new Date()
@@ -99,6 +98,7 @@ Page({
         that.data.attributeUnitType.push(res.data[i].attributeUnitType)
       }
       }
+      console.log(that.data.attributeValue)
       that.setData({
         goods_type_id:options.goods_goods_type_id,
         productName:options.goods_type_name,
@@ -110,7 +110,8 @@ Page({
         caculateResult:res.data.defaultPrice,
         goods_type_priceonly:options.goods_type_priceonly
       })
-      // console.log(that.data.attributeValue)
+      console.log("zong")
+       console.log(that.data.userResult)
     }
     })
 
@@ -159,7 +160,7 @@ Page({
   tpBtnPressHandler:function(e){
 
     common.showDialog()
-
+    // console.log(e)
     var that = this
     for(var i=0;i<that.data.userResult[e.target.dataset.index].length;i++){
       if(i==e.target.dataset.btnindex){
@@ -168,6 +169,7 @@ Page({
         that.data.userResult[e.target.dataset.index].splice(i,1,"tp_attributeValue")
       }
     }
+    console.log(that.data.userResult)
     that.setData({
       userResult:that.data.userResult
     })
@@ -188,14 +190,51 @@ Page({
       // header: {}, // 设置请求的 header
       success: function(res){
         // success
-        // console.log(res.data)
-        var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
+        console.log(res.data)
+        if(that.data.goods_type_id == 16){
+if(res.data.defaultPrice == null){
+          wx.hideToast()
+          that.setData({
+            isShowException:true,
+            exceptionInfo:"年缴费不能低于660元！请重新选择",
+            caculateResult:"",
+          })
+          setTimeout( function() {
+            that.setData({
+              isShowException:false,
+            })
+        }, 3000 );
+        }else{
+          var a = common.reviseAttribute(res.data,that.data.attributeValue,that.data.attributeName,that.data.productInfo,that.data.userResult)
+          that.data.attributeValue = a[0]
+          that.data.productInfo = a[1]
+          that.data.userResult = a[2]
+          var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
+        attributeValue:that.data.attributeValue,
         lastResult:result,
         caculateResult:res.data.defaultPrice,
         userResult:newUserResult
       })
          wx.hideToast()
+        }
+        }else{
+           var a = common.reviseAttribute(res.data,that.data.attributeValue,that.data.attributeName,that.data.productInfo,that.data.userResult)
+          that.data.attributeValue = a[0]
+          that.data.productInfo = a[1]
+          that.data.userResult = a[2]
+        var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
+        console.log("newResult")
+        console.log(that.data.userResult)
+        console.log(newUserResult)
+        that.setData({
+          attributeValue:that.data.attributeValue,
+        lastResult:result,
+        caculateResult:res.data.defaultPrice,
+        userResult:newUserResult
+      })
+         wx.hideToast()
+        }
       },
     })
     }
@@ -295,10 +334,10 @@ Page({
     common.showDialog()
     var that = this
     that.data.userResult[e.target.dataset.index].splice(0,1,e.detail.value)
+    
     that.setData({
       userResult:that.data.userResult
     })
-
     // 刷新价格
     var result = common.getUserResult(that.data.productInfo,that.data.userResult,that.data.lastResult,that.data.goods_type_priceonly)
     if(JSON.stringify(result).indexOf('.') == -1){wx.hideToast()}else{
@@ -315,13 +354,37 @@ Page({
       success: function(res){
         // success
         console.log(res.data)
+        if(res.data.defaultPrice == null){
+          wx.hideToast()
+          that.setData({
+            isShowException:true,
+            exceptionInfo:"所选日期区间应为"+that.data.attributeValue[e.target.dataset.index][0]+"至"+that.data.attributeValue[e.target.dataset.index][1],
+            caculateResult:"",
+          })
+          setTimeout( function() {
+            that.setData({
+              isShowException:false,
+            })
+        }, 3000 );
+        }else{
+        console.log("old userResult")
+    console.log(that.data.userResult)
+    var a = common.reviseAttribute(res.data,that.data.attributeValue,that.data.attributeName,that.data.productInfo,that.data.userResult)
+          that.data.attributeValue = a[0]
+          that.data.productInfo = a[1]
+          that.data.userResult = a[2]
         var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
+        console.log("newResult")
+        console.log(newUserResult)
         that.setData({
+        attributeValue:that.data.attributeValue,
         lastResult:result,
         caculateResult:res.data.defaultPrice,
         userResult:newUserResult
       })
-        wx.hideToast()
+      wx.hideToast()
+      }
+        
       },
     })
     }
@@ -352,11 +415,29 @@ Page({
       success: function(res){
         // success
         console.log(res.data)
-
-       var b = common.revisePremium(res.data,that.data.productInfo,that.data.attributeValue,that.data.userResult)
+        if(that.data.goods_type_id == 16){
+if(res.data.defaultPrice == null){
+          wx.hideToast()
+          that.setData({
+            isShowException:true,
+            exceptionInfo:"年缴费不能低于660元！请重新选择",
+            caculateResult:"",
+          })
+          setTimeout( function() {
+            that.setData({
+              isShowException:false,
+            })
+        }, 3000 );
+        }else{
+          var a = common.reviseAttribute(res.data,that.data.attributeValue,that.data.attributeName,that.data.productInfo,that.data.userResult)
+          that.data.attributeValue = a[0]
+          that.data.productInfo = a[1]
+          that.data.userResult = a[2]
+          var b = common.revisePremium(res.data,that.data.productInfo,that.data.attributeValue,that.data.userResult)
 
         var newUserResult = common.reviseData(res.data,b[2],that.data.attributeName,b[0])
         that.setData({
+        attributeValue:that.data.attributeValue,
         lastResult:result,
         caculateResult:res.data.defaultPrice,
         userResult:newUserResult,
@@ -364,6 +445,25 @@ Page({
         attributeValue:b[1]
       })
         wx.hideToast()
+        }
+        }else{
+          var a = common.reviseAttribute(res.data,that.data.attributeValue,that.data.attributeName,that.data.productInfo,that.data.userResult)
+          that.data.attributeValue = a[0]
+          that.data.productInfo = a[1]
+          that.data.userResult = a[2]
+       var b = common.revisePremium(res.data,that.data.productInfo,that.data.attributeValue,that.data.userResult)
+
+        var newUserResult = common.reviseData(res.data,b[2],that.data.attributeName,b[0])
+        that.setData({
+        attributeValue:that.data.attributeValue,
+        lastResult:result,
+        caculateResult:res.data.defaultPrice,
+        userResult:newUserResult,
+        productInfo:b[0],
+        attributeValue:b[1]
+      })
+        wx.hideToast()
+        }
        },
     })
     }
@@ -396,8 +496,13 @@ Page({
       success: function(res){
         // success
         // console.log(res.data)
+        var a = common.reviseAttribute(res.data,that.data.attributeValue,that.data.attributeName,that.data.productInfo,that.data.userResult)
+          that.data.attributeValue = a[0]
+          that.data.productInfo = a[1]
+          that.data.userResult = a[2]
         var newUserResult = common.reviseData(res.data,that.data.userResult,that.data.attributeName,that.data.productInfo)
         that.setData({
+        attributeValue:that.data.attributeValue,
         lastResult:result,
         caculateResult:res.data.defaultPrice,
         userResult:newUserResult

@@ -15,10 +15,10 @@
     </swiper-item>  
     <!-- 保险分类 -->  
     <swiper-item style="margin-top:80rpx;">   
-      <template is="insuranceClassify" data="{{insuranceClassify_name}}" />    
+      <template is="insuranceClassify" data="{{insuranceClassify_name,insuranceClassify_photo,insuranceClassify_desc}}" />    
     </swiper-item>  
     <!-- 公司分类 -->  
     <swiper-item style="margin-top:80rpx;">  
-      <template is="insuranceCompany" data="{{insuranceCompany_name}}" />  
+      <template is="insuranceCompany" data="{{insuranceCompany_name,insuranceCompany_desc,insuranceCompany_photo}}" />  
     </swiper-item>  
 </swiper>  

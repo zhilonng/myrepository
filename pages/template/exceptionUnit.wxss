@@ -11,4 +11,5 @@
     width: 100%;
     font-size: 30rpx;
     color: #FFFFFF;
+    margin-top: 10rpx;
 }

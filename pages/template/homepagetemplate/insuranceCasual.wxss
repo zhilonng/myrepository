@@ -27,8 +27,10 @@
     font-size: 30rpx;
     width: 75%;
     margin-left: 10rpx;
-    line-height: 80rpx; 
     color: #111;
+    line-height: 35rpx; 
+    margin-top:25rpx;
+    
 }
 .insurancePrice{
     width: 25%;
