@@ -30,7 +30,7 @@
     margin-left: 15rpx;
     margin-bottom:15rpx;
     border:1rpx #1AAD19 solid;
-    font-size: 12px;
+    font-size: 10px;
     color: #1AAD19;
     background: #FFFFFF;
     line-height: 60rpx;
@@ -43,7 +43,7 @@
     margin-left: 15rpx;
     margin-bottom:15rpx;
     border:1rpx #1AAD19 solid;
-    font-size: 12px;
+    font-size: 10px;
     color: #FFFFFF;
     background: #1AAD19;
     line-height: 60rpx;

@@ -1,29 +1,75 @@
 // pages/insuranceCaculator/insuranceCaculator.js
+/**
+ * 引入common.js，用作：
+ * 用户数据生成
+ * 产品信息修改
+ * 部分界面效果生成
+ */
 var common = require('../template/common.js')
 
 Page({
   data:{
+    /**
+     * 产品信息：
+     * goods_type_id：产品号
+     * productName：产品名
+     * goods_type_priceonly：部分产品需返回，安心无忧意外保障可用，后期可能取消
+     * caculateResult：产品价格
+     */
     goods_type_id:'',
     productName:'',
     goods_type_priceonly:"",
-    lastResult:{},
+    caculateResult:'',
+    /**
+     * 产品数据，作显示与后期计算用，包括：
+     * productInfo:产品总信息，请求产品号后返回的原始数据
+     * attributeName:属性名
+     * attributeValue:属性值，用以记录属性名对应的 属性值，其余attributeName为对应关系
+     * attributeUnitType:属性类型，共有6种类型
+     * attributeValueindex:暂时无用途，后地区选择卡功能会用到
+     * areaid：一级地区id
+     * secondareaid：二级地区id
+     */
     productInfo:[],
     attributeName:[],
     attributeValue:[],
     attributeUnitType:[],
-    isShowException:false,
-    exceptionInfo:"卡号格式不正确",
     attributeValueindex:[],
-    userResult:[],
     areaid:[],
     secondareaid:[],
-    caculateResult:'',
+    /**
+     * 异常显示：
+     * isShowException：是否显示异常
+     * exceptionInfo：异常信息
+     */
+    isShowException:false,
+    exceptionInfo:"",
+    /**
+     * 计算数据
+     * lastResult:上次用户点击产生的旧数据，用于产生新数据
+     * userResult：用户新产生的数据，用作与服务器交流，获取修改后的新价格
+     */
+    lastResult:{},
+    userResult:[],
+    
   },
   onLoad:function(options){
     // console.log(options)
     // 页面初始化 options为页面跳转所带来的参数
     var that = this
-// 获取保险参数并完成初始化
+/**
+ * 获取保险参数并完成初始化
+ * 完成初始化的数据包括：
+ * 1）产品的列表显示信息：
+ * productName
+ * attributeValue
+ * attributeUnitType
+ * attributeName
+ * 2）产品信息存储：
+ * productInfo
+ * 3）价格显示：
+ * caculateResult
+ */
     wx.request({
     url: 'https://baby.mamid.cn/Caculate/Goods/getGoods/goods_goods_type_id/'+options.goods_goods_type_id, 
     header: {
@@ -156,7 +202,14 @@ Page({
   onUnload:function(){
     // 页面关闭
   },
-  // 方格布局点击事件
+  /**
+   * 事件：方格布局点击
+   * 描述：
+   * 1）用户效果：点击方格后，修改方格attributeValue，生成点击效果，
+   * 2）数据刷新：生成result对象（用户当前的数据封装而成，详细可看common.js的生成方式），递交服务器，服务器返回需修改的属性项，修改并重新刷新界面
+   * 注意：
+   * ！！为提高用户使用效果与个别特殊点击产生的错误，屏蔽了点击相同项产生的数据！！
+   */
   tpBtnPressHandler:function(e){
 
     common.showDialog()
@@ -328,7 +381,13 @@ if(res.data.defaultPrice == null){
       attributeValueindex:that.data.attributeValueindex
     })
   },
-  // 时间选择器日期改变事件
+  /**
+   * 事件：时间选择器日期改变
+   * 描述：
+   * 同方格点击事件
+   * 注意：
+   * 同方格点击事件
+   */
   bindDateChange:function(e){
     console.log(e)
     common.showDialog()
@@ -389,7 +448,13 @@ if(res.data.defaultPrice == null){
     })
     }
   },
-  // radio点击事件
+  /**
+   * 事件：radio点击事件
+   * 描述：
+   * 同方格点击事件
+   * 注意：
+   * 同方格点击事件
+   */
   radioClickHandler:function(e){
     console.log(e)
     var that = this
@@ -468,7 +533,13 @@ if(res.data.defaultPrice == null){
     })
     }
   },
-  // 普通选择器
+  /**
+   * 事件：普通选择器点击事件
+   * 描述：
+   * 同方格点击事件
+   * 注意：
+   * 同方格点击事件
+   */
   bindPickerChange:function(e){
     // console.log(e)
     var that = this
@@ -516,7 +587,9 @@ if(res.data.defaultPrice == null){
   resultCaculateHandle:function(){
     
   },
-  //分享
+  /**
+   * 功能：分享当前页
+   */
   onShareAppMessage: function () {
     var that = this
     return {

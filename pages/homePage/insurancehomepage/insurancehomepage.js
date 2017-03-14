@@ -1,4 +1,7 @@
 // pages/homePage/insurancehomepage/insurancehomepage.js
+/**
+ * 引入common.js
+ */
 var common = require('../../template/common.js')
 //获取应用实例  
 var app = getApp()  
@@ -41,8 +44,8 @@ Page( {
       that.setData({
         productName:that.data.productName,
         productInfo:res.data,
-        winHeight: (res.data.length+1)*310+80,
-        casusalHeight:(res.data.length+1)*310+80
+        winHeight: (res.data.length+1)*312+80,
+        casusalHeight:(res.data.length+1)*312+80
       })
     }
     })
@@ -185,7 +188,9 @@ Page( {
         
     }  
   },
-  // 跳转到保费计算界面
+  /**
+   * 事件：跳转到保费计算界面
+   */
   turnIntoCaculaPage:function(e){
     console.log(e)
     var that = this

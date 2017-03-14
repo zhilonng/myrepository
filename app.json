@@ -1,9 +1,8 @@
 {
   "pages":[
     "pages/homePage/insurancehomepage/insurancehomepage",
-    "pages/logs/logs",
     "pages/insuranceCaculator/insuranceCaculator",
-    "pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList"
+"pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList"
   ],
   "window":{
     "backgroundTextStyle":"light",

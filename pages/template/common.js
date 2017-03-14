@@ -1,11 +1,15 @@
 // common.js
-// 获取用户保险数据并封装为result对象
+/**
+ *获取用户保险数据并封装成result对象
+ *result对象包括当前的userResult所对应的attributeValue，
+ *也包括被修改的值所对应修改前的值，在其属性名前加"."
+ */
 function getUserResult(productInfo,userResult,lastResult,goods_type_priceonly) {
-//     console.log("=================")
-//   console.log(productInfo)
-//   console.log(userResult)
-//   console.log(lastResult)
-//   console.log(goods_type_priceonly)
+    //     console.log("=================")
+    //   console.log(productInfo)
+    //   console.log(userResult)
+    //   console.log(lastResult)
+    //   console.log(goods_type_priceonly)
   var result ={}
   var length = 0
   var newProductInfo = []
@@ -196,6 +200,13 @@ function getPrice(result){
       },
     })
 }
+/**
+ * 修改产品属性值，包括：
+ *productInfo:修改其中针对每一个属性的attributeValue
+ *attributeValue：动态修改res结果返回的值
+ *userResult：动态修改res返回的defalut值
+ */
+
 function reviseAttribute(res,attributeValue,attributeName,productInfo,userReuslt){
     // console.log("=====")
     // console.log(productInfo)
@@ -222,6 +233,19 @@ function reviseAttribute(res,attributeValue,attributeName,productInfo,userReuslt
             if(res[i] == undefined){length++}else{
                 for(var j=0;j<attributeValue.length;j++){
                     if(attributeName[j] == res[i].attributeName){
+                    /**
+                     * 时间类型的attributeValue需要将时间戳转换为
+                     * 年-月-日类型，并重新付给res
+                     */
+                    if(res[i].attributeUnitType ==4){
+                            var today = new Date()
+          var startTime = new Date(today.valueOf()-res[i].attributeValue[1]*24*60*60*1000)
+          var endTime = new Date(today.valueOf()-res[i].attributeValue[0]*24*60*60*1000)
+          startTime = startTime.getFullYear()+"-"+(startTime.getMonth()+1)+"-"+startTime.getDate()
+          endTime = endTime.getFullYear()+"-"+(endTime.getMonth()+1)+"-"+endTime.getDate()
+          res[i].attributeValue.splice(0,1,startTime)
+          res[i].attributeValue.splice(1,1,endTime)
+                        }
                         if(typeof attributeValue[j] ==typeof res[i].attributeValue ){
                         attributeValue.splice(j,1,res[i].attributeValue)
                         var length3 = product_length
@@ -273,13 +297,16 @@ function reviseAttribute(res,attributeValue,attributeName,productInfo,userReuslt
     a.push(userReuslt)
     return a
 }
-
+/**
+ * 修改userResult
+ * 使其与返回结果res中的默认值相等
+ */
 function reviseData(res,userResult,attributeName,productInfo){
-    console.log("=====")
-    console.log(productInfo)
-    console.log(res)
-    console.log(userResult)
-    console.log(attributeName)
+    // console.log("=====")
+    // console.log(productInfo)
+    // console.log(res)
+    // console.log(userResult)
+    // console.log(attributeName)
     var length = 0
     for(var js2 in res){
     length++;
@@ -328,6 +355,9 @@ function reviseData(res,userResult,attributeName,productInfo){
         return userResult
     }
 }
+/**
+ * 特殊值修改，仅针对premium属性名的值
+ */
 function revisePremium(res,productInfo,attributeValue,userResult){
     // console.log("===---")
     // console.log(res)
@@ -382,17 +412,22 @@ function revisePremium(res,productInfo,attributeValue,userResult){
  b.push(userResult)
  return b
 }
+/**
+ * 弹出窗口
+ */
 function showDialog(){
   wx.showToast({
   title: '加载中',
   icon: 'loading',
   duration: 10000
 })
-
 setTimeout(function(){
   wx.hideToast()
 },2000)
 }
+/**
+ * 判断对象是否为空
+ */
 function isEmptyObject(obj) {
   for (var key in obj) {
     return false;
