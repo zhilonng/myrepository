@@ -1,5 +1,5 @@
 <template name="attributeUnit">
-<!--属性布局-->
+<!--属性-->
 <view wx:for="{{attributeName}}" wx:for-item="attributeName" class="tp_atrributeUnit">
 <!--属性名-->
 <view class="tp_attributeName">{{attributeName}}:</view>

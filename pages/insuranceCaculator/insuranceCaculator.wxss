@@ -7,10 +7,16 @@ page{
     background: #eeeeee;
 }
 .bottom{
-    height: 300rpx;
+    height: 250rpx;
 }
 .lb_attributeValue{
+    margin-top: 5rpx;
     margin-left: 15rpx;
     height: 100%;
     line-height: 155%;
+}
+.logo{
+    font-size: 30rpx;
+    color: #999999;
+    text-align: center;
 }
