@@ -1,0 +1,47 @@
+<!--pages/secondLevelPage/servicepurchasedetails/servicepurchasedetails.wxml-->
+<view class="serviceIntroduceContainer">
+<view class="sv_clause_container" >
+<view class="sv_clause_name" style="font-weight: bold;">服务名称</view>
+<view class="sv_clause_content" style="font-weight: bold;">{{serviceName}}</view>
+</view>
+<view class="tp_insuranceClassify_line"></view>
+<view wx:for="{{serviceClauseName}}">
+<view class="sv_clause_container">
+<view class="sv_clause_name">{{item}}</view>
+<view class="sv_clause_content" >{{serviceClauseContent[index]}}</view>
+</view>
+<view class="tp_insuranceClassify_line"></view>
+</view>
+</view>
+
+<view style="margin:20rpx 0rpx 15rpx 30rpx;color:#353535;font-size:35rpx;">服务详情</view>
+<view class="serviceIntroduceContainer" style="border-top:1rpx solid #D9D9D9; text-align:center;" >
+<view wx:for="{{detailsClauseName}}">
+<image class="img_details" src="{{detailsClauseImage[index]}}"></image>
+<view style="font-size:45rpx;font-weight:bold;color:#353535;">{{item}}</view>
+<view style="padding:20rpx 40rpx 20rpx 40rpx;display:flex;flex-wrap:wrap;margin-bottom:30rpx;">{{drtailsClauseContent[index]}}</view>
+<view class="tp_insuranceClassify_line" style="width:94%;margin-left:3%;"></view>
+</view>
+</view>
+
+<view class="serviceIntroduceContainer" style="margin:30rpx 0rpx 30rpx 0rpx;padding:15rpx 0rpx 15rpx 0rpx;border-top:1rpx solid #D9D9D9; text-align:left;" bindtap="changeProtocolAgreement">
+ <radio style="margin-left:20rpx;" checked="{{isAgreeProtocol}}">
+<text>我已阅读并同意《服务协议》</text>
+</radio>
+</view>
+
+<view class="serviceIntroduceContainer" style="border-top:1rpx solid #D9D9D9;">
+<view wx:for="{1,">
+<view class="sv_clause_container">
+<view class="sv_clause_name">服务价格</view>
+<input class="sv_clause_content" style="text-align:left;" value="9.00元"/>
+</view>
+<view class="tp_insuranceClassify_line"></view>
+</view>
+</view>
+
+<button type="primary" style="width:80%;margin:30rpx 10% 100rpx 10%;display:flex;flex-wrap:wrap;">
+<image src="../../images/icon-wechat.png" style="width:7%;height:40rpx;margin:24rpx 10rpx 0rpx 33%;"></image>
+<view style="width:27%;">微信支付</view>
+</button>
+<view style="height:100rpx;"></view>

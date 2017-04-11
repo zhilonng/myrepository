@@ -1,0 +1,61 @@
+<!--pages/homePage/servicepurchase/servicepurchase.wxml-->
+<!--logo-->
+<view class="logoContainer">
+<image class="logo" src="../../images/logo.png"></image>
+<view>
+<view class="logo_mami_yanjiuyuan">妈咪研究院</view>
+<view class="logo_introduce">年轻家庭的专业服务机构</view>
+</view>
+<view class="logoLabelContainer">
+<view class="logo_label_container">
+
+<view class="logo_label_introduce">⊙ 年轻</view>
+</view>
+<view class="logo_label_container">
+<view class="logo_label_introduce">⊙ 真心</view>
+</view>
+<view class="logo_label_container">
+<view class="logo_label_introduce">⊙ 简单</view>
+</view>
+</view>
+</view>
+
+<!--photo-->
+<image style="margin-top:15rpx;width:100%;height:380rpx;" src="../../images/momlab_bg.jpg"></image>
+
+<!--家庭保险-->
+<view style="margin-top:40rpx;font-size:40rpx;font-weight:bold;color:#353535;text-align:center;">家庭保险</view>
+<view style="font-size:25rpx;color:#999;text-align:center;">由「妈咪研究院」保险组专业团队提供服务</view>
+
+<!--保险服务-->
+<view class="insruanceContainer">
+<view class="insurance_service_consule" hover-class="hover_insurance_service_consule" data-index="1" index- bindtap="turnToDetails">
+<image class="img_consule" src="../../images/icon_6.png"></image>
+<view>
+<view class="tx_insrance_consule">咨询服务</view>
+<view class="tx_consule_content">内容：咨询家庭保险相关问题</view>
+<view class="tx_consule_content">形式：专家一对一微信咨询</view>
+<view class="tx_consule_content">时长：7天</view>
+</view>
+<view>
+<view class="tx_consule_money">￥9元</view>
+<image class="ic_turnTo" src="../../images/ic_click.png"></image>
+</view>
+</view>
+
+<view class="tp_insuranceClassify_line"></view>
+
+<view class="insurance_service_consule" hover-class="hover_insurance_service_consule" data-index="2" bindtap="turnToDetails">
+<image class="img_consule" src="../../images/icon_1.png"></image>
+<view>
+<view class="tx_insrance_consule">托管服务</view>
+<view class="tx_consule_content">内容：家庭保险配置、委托和管理</view>
+<view class="tx_consule_content">形式：全家全程一体化服务</view>
+<view class="tx_consule_content">时长：365天</view>
+</view>
+<view>
+<view class="tx_consule_money" style="margin-left: 62rpx;">￥39元</view>
+<image class="ic_turnTo" src="../../images/ic_click.png" style="line-height:150%;margin-left: 85rpx;"></image>
+</view>
+</view>
+</view>

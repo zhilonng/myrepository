@@ -1,13 +1,26 @@
 {
   "pages":[
+    "pages/homePage/servicepurchase/servicepurchase",
     "pages/homePage/insurancehomepage/insurancehomepage",
     "pages/insuranceCaculator/insuranceCaculator",
-"pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList"
+"pages/secondLevelPage/insuranceClassifyList/insuranceClassifyList",
+"pages/secondLevelPage/servicepurchasedetails/servicepurchasedetails"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "保费计算器",
-    "navigationBarTextStyle":"black"
+    "navigationBarBackgroundColor": "#353535",
+    "navigationBarTitleText": "妈咪研究院",
+    "navigationBarTextStyle":"#FFF"
+  },
+  "tabBar": {
+    "list": [{
+      "pagePath": "pages/homePage/servicepurchase/servicepurchase",
+      "iconPath": "pages/images/ic_cart.png",
+      "text": "服务购买"
+    }, {
+      "pagePath": "pages/homePage/insurancehomepage/insurancehomepage",
+      "iconPath": "pages/images/ic_calculator.png",
+      "text": "计算器"
+    }]
   }
 }

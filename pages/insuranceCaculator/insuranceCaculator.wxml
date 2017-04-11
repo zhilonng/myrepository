@@ -18,7 +18,7 @@
 <!--用户属性输入模块-->
 <template is="attributeUnit" data="{{attributeName, attributeUnitType,attributeValue,attributeValueindex,userResult}}" />
 <!--logo-->
-<view class="logo">由广州懵懂科技有限公司提供技术支持</view>
+<view class="logo">由「广州懵懂科技有限公司」提供技术支持</view>
 <!--保险计算单元-->
 <template is="caculateResultUnit" data="{{caculateResult}}" />
 <!--填充模块-->

@@ -1,0 +1,42 @@
+/* pages/secondLevelPage/servicepurchasedetails/servicepurchasedetails.wxss */
+page{
+    background: #eeeeee;
+}
+.serviceIntroduceContainer{
+    width: 100%;
+    height: auto;
+    background: #FFF;
+    border-bottom: 1rpx solid #D9D9D9;
+    padding-top: 15rpx;
+}
+.sv_clause_container{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10rpx;
+    margin-bottom: 10rpx;
+}
+.sv_clause_name{
+    width: 26%;
+    font-size: 35rpx;
+    padding-left: 4%;
+    color: #353535;
+}
+.sv_clause_content{
+    width: 66%;
+    font-size: 35rpx;
+    text-align: right;
+    padding-right: 4%;
+    color: #353535;
+}
+.tp_insuranceClassify_line{
+    width: 95%;
+    height: 3rpx;
+    background: #F5F5F5;
+    margin-left: 5%;
+}
+.img_details{
+    width: 200rpx;
+    height: 200rpx;
+    margin-top: 30rpx;
+}
