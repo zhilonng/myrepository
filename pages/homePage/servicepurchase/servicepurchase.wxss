@@ -45,14 +45,28 @@ page{
 
 /*保险服务*/
 .insruanceContainer{
-    width: 96%;
     height: auto;
-    background: #FFF;
-    margin: 20rpx 2% 0rpx 2%;
-    border-radius: 15rpx;
+    margin: 20rpx 0rpx 0rpx 0rpx;
+    display: flex;
+    flex-direction: row;
+}
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 55px solid transparent;
+    border-left: 68px solid #FFF;
+    border-bottom: 55px solid transparent;
+}
+.triangle-right1 {
+    width: 0;
+    height: 0;
+    border-top: 55px solid transparent;
+    border-left: 68px solid #D9D9D9;
+    border-bottom: 55px solid transparent;
 }
 .insurance_service_consule{
     display: flex;
+    background: #FFF;
     flex-direction: row;
 }
 .hover_insurance_service_consule{
@@ -63,7 +77,7 @@ page{
 }
 .img_consule{
     margin: 20rpx 10rpx 0rpx 20rpx;
-    width: 150rpx;
+    width: 140rpx;
     height: 150rpx;
 }
 .tx_insrance_consule{
@@ -79,7 +93,7 @@ page{
 .tx_consule_money{
     height:30rpx;
     margin-top:20rpx;
-    margin-left: 120rpx;
+    margin-left: 23rpx;
     border:1px solid #12b7f5;
     padding:2px 5px;
     border-radius:30rpx;
@@ -94,7 +108,7 @@ page{
     font-size: 60rpx;
     font-weight: bold;
     margin-top: 10rpx;
-    margin-left: 135rpx;
+    margin-left: 70rpx;
 }
 .tp_insuranceClassify_line{
     width: 100%;

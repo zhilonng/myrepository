@@ -1,6 +1,9 @@
 // pages/homePage/servicepurchase/servicepurchase.js
 Page({
-  data:{},
+  data:{
+    triangleClass:'triangle-right',
+    consuleClass:'insurance_service_consule'
+  },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
   },
@@ -17,6 +20,17 @@ Page({
     // 页面关闭
   },
   turnToDetails: function(ev){
+    var that = this
+    that.setData({
+      consuleClass:'hover_insurance_service_consule',
+      triangleClass:'triangle-right1'
+    })
+    setInterval(function(){
+       that.setData({
+      consuleClass:'insurance_service_consule',
+      triangleClass:'triangle-right'
+    })
+},1000);
     wx.navigateTo({
       url: '../../secondLevelPage/servicepurchasedetails/servicepurchasedetails?index='+ev.currentTarget.dataset.index
     })
